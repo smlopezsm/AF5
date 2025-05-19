@@ -19,7 +19,7 @@ public class ConsultaJuagadoresPorEquipo extends javax.swing.JPanel {
         labelEquipo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelEquipo.setText("Ingrese el equipo");
 
-        equipos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10" }));
+        equipos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boca Juniors", "River Plate", "Real Madrid", "Barcelona Fc", "San Martin de San Juan", "Estudiantes", "Juventud Unida", "Defensores", "Barracas Central", "Sol de Mayo" }));
         equipos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 equiposActionPerformed(evt);

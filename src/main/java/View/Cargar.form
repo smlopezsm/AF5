@@ -48,9 +48,9 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="JugadorBtn" min="-2" pref="334" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="ArbitroBtn" min="-2" pref="333" max="-2" attributes="0"/>
+                          <Component id="JugadorBtn" pref="332" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <Component id="ArbitroBtn" pref="332" max="32767" attributes="0"/>
                       </Group>
                       <Component id="PanelCarga" max="32767" attributes="0"/>
                   </Group>
@@ -62,9 +62,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="ArbitroBtn" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
-                      <Component id="JugadorBtn" alignment="3" min="-2" pref="58" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="ArbitroBtn" pref="60" max="32767" attributes="0"/>
+                      <Component id="JugadorBtn" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>

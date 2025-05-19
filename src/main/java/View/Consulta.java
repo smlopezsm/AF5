@@ -1,6 +1,5 @@
 package View;
 
-import View.*;
 import java.awt.BorderLayout;
 
 public class Consulta extends javax.swing.JPanel {
@@ -18,67 +17,54 @@ public class Consulta extends javax.swing.JPanel {
         jugadoresPorGoles = new javax.swing.JButton();
         CantJugadoresPorEquipo = new javax.swing.JButton();
         jugadoresMaxExpulsion = new javax.swing.JButton();
-        MostrarPersona = new javax.swing.JButton();
         arbitrosInternacional = new javax.swing.JButton();
         jugadoresPorPosicion1 = new javax.swing.JButton();
         consultaEspecifica = new javax.swing.JPanel();
 
-        Botones.setBackground(new java.awt.Color(0, 51, 204));
-
-        jugadoresPorGoles.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jugadoresPorGoles.setText("Jugadores por cantidad de goles");
-        jugadoresPorGoles.setBorder(null);
-        jugadoresPorGoles.setBorderPainted(false);
+        jugadoresPorGoles.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jugadoresPorGoles.setText("Jugadores x cant. goles");
+        jugadoresPorGoles.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        jugadoresPorGoles.setPreferredSize(new java.awt.Dimension(140, 18));
         jugadoresPorGoles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jugadoresPorGolesActionPerformed(evt);
             }
         });
 
-        CantJugadoresPorEquipo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        CantJugadoresPorEquipo.setText("Cantidad de jugadores por equipo");
-        CantJugadoresPorEquipo.setBorder(null);
-        CantJugadoresPorEquipo.setBorderPainted(false);
+        CantJugadoresPorEquipo.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        CantJugadoresPorEquipo.setText("Cant. jug x equipo");
+        CantJugadoresPorEquipo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        CantJugadoresPorEquipo.setPreferredSize(new java.awt.Dimension(140, 18));
         CantJugadoresPorEquipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CantJugadoresPorEquipoActionPerformed(evt);
             }
         });
 
-        jugadoresMaxExpulsion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jugadoresMaxExpulsion.setText("Jugador con mas expulsiones");
-        jugadoresMaxExpulsion.setBorder(null);
-        jugadoresMaxExpulsion.setBorderPainted(false);
+        jugadoresMaxExpulsion.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jugadoresMaxExpulsion.setText("Jugador c. + expulsiones");
+        jugadoresMaxExpulsion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        jugadoresMaxExpulsion.setPreferredSize(new java.awt.Dimension(140, 18));
         jugadoresMaxExpulsion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jugadoresMaxExpulsionActionPerformed(evt);
             }
         });
 
-        MostrarPersona.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        MostrarPersona.setText("Mostrar personas");
-        MostrarPersona.setBorder(null);
-        MostrarPersona.setBorderPainted(false);
-        MostrarPersona.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MostrarPersonaActionPerformed(evt);
-            }
-        });
-
-        arbitrosInternacional.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        arbitrosInternacional.setText("Árbitros con internacional");
-        arbitrosInternacional.setBorder(null);
-        arbitrosInternacional.setBorderPainted(false);
+        arbitrosInternacional.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        arbitrosInternacional.setText("Árbitros c. internacional");
+        arbitrosInternacional.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        arbitrosInternacional.setPreferredSize(new java.awt.Dimension(140, 18));
         arbitrosInternacional.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 arbitrosInternacionalActionPerformed(evt);
             }
         });
 
-        jugadoresPorPosicion1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jugadoresPorPosicion1.setText("Jugadores por posición");
-        jugadoresPorPosicion1.setBorder(null);
-        jugadoresPorPosicion1.setBorderPainted(false);
+        jugadoresPorPosicion1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jugadoresPorPosicion1.setText("Jugadores x posición");
+        jugadoresPorPosicion1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        jugadoresPorPosicion1.setPreferredSize(new java.awt.Dimension(140, 18));
         jugadoresPorPosicion1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jugadoresPorPosicion1ActionPerformed(evt);
@@ -89,47 +75,41 @@ public class Consulta extends javax.swing.JPanel {
         Botones.setLayout(BotonesLayout);
         BotonesLayout.setHorizontalGroup(
             BotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jugadoresPorGoles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(CantJugadoresPorEquipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-            .addComponent(arbitrosInternacional, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jugadoresMaxExpulsion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jugadoresPorPosicion1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(MostrarPersona, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(BotonesLayout.createSequentialGroup()
+                .addComponent(CantJugadoresPorEquipo, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(jugadoresPorGoles, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(arbitrosInternacional, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(jugadoresMaxExpulsion, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(jugadoresPorPosicion1, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
         );
         BotonesLayout.setVerticalGroup(
             BotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BotonesLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(CantJugadoresPorEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jugadoresPorGoles, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(arbitrosInternacional, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jugadoresMaxExpulsion, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jugadoresPorPosicion1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(MostrarPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+            .addComponent(CantJugadoresPorEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jugadoresPorGoles, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(arbitrosInternacional, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jugadoresMaxExpulsion, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jugadoresPorPosicion1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        consultaEspecifica.setBackground(new java.awt.Color(51, 51, 255));
         consultaEspecifica.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout FondoLayout = new javax.swing.GroupLayout(Fondo);
         Fondo.setLayout(FondoLayout);
         FondoLayout.setHorizontalGroup(
             FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FondoLayout.createSequentialGroup()
-                .addGap(228, 228, 228)
-                .addComponent(consultaEspecifica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(Botones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(Botones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(consultaEspecifica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         FondoLayout.setVerticalGroup(
             FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(consultaEspecifica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Botones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(FondoLayout.createSequentialGroup()
+                .addComponent(Botones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(1, 1, 1)
+                .addComponent(consultaEspecifica, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -140,7 +120,9 @@ public class Consulta extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(1, 1, 1))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -177,14 +159,6 @@ public class Consulta extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jugadoresMaxExpulsionActionPerformed
 
-    private void MostrarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarPersonaActionPerformed
-        consultaEspecifica.removeAll();
-        consultaEspecifica.setLayout( new BorderLayout()); 
-        consultaEspecifica.add(new  MostrarPersonas(),BorderLayout.CENTER);
-        this.revalidate();
-        this.repaint(); 
-    }//GEN-LAST:event_MostrarPersonaActionPerformed
-
     private void jugadoresPorPosicion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugadoresPorPosicion1ActionPerformed
         consultaEspecifica.removeAll();
         consultaEspecifica.setLayout( new BorderLayout()); 
@@ -197,7 +171,6 @@ public class Consulta extends javax.swing.JPanel {
     private javax.swing.JPanel Botones;
     private javax.swing.JButton CantJugadoresPorEquipo;
     private javax.swing.JPanel Fondo;
-    private javax.swing.JButton MostrarPersona;
     private javax.swing.JButton arbitrosInternacional;
     private javax.swing.JPanel consultaEspecifica;
     private javax.swing.JButton jugadoresMaxExpulsion;
