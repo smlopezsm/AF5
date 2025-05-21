@@ -1,11 +1,35 @@
 package View;
 
+import Controller.Controlador;
+import Controller.Controlador.JugadorNoEncontradoException;
+import Model.Fecha;
+import Model.Jugador;
+import javax.swing.JOptionPane;
+
 public class DatosEliminarJugador extends javax.swing.JPanel {
 
-    public DatosEliminarJugador() {
+    
+    private Jugador jugadorBuscado;
+    public DatosEliminarJugador(Jugador jugadorBuscado) {
+        this.jugadorBuscado = jugadorBuscado;
         initComponents();
     }
 
+    public void mostrar(Jugador jugadorBuscado){
+                String nombre = jugadorBuscado.getNombre();
+                String apellido = jugadorBuscado.getApellido();
+                Fecha f = jugadorBuscado.getFechaNac();
+                int dia = f.getDia();
+                int mes = f.getMes();
+                int anio = f.getAnio();
+                String fnac = dia+"/"+mes+"/"+anio;
+                String nacionalidad = jugadorBuscado.getNacionalidad();
+                String clubActual = jugadorBuscado.getClubActual();
+                int posicion = jugadorBuscado.getPosicion();
+                int goles = jugadorBuscado.getGoles();
+                int tarjetasAmarillas = jugadorBuscado.getTarjetasAmarillas();
+                int tarjetasRojas = jugadorBuscado.getTarjetasRojas();
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -126,7 +150,13 @@ public class DatosEliminarJugador extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        try{    
+               
+                Controlador.eliminarJugador(jugadorBuscado);
+                JOptionPane.showMessageDialog(this,"Jugador Eliminado exitosamente");
+            }catch (JugadorNoEncontradoException e) {
+                JOptionPane.showMessageDialog(this,e.getMessage(),"Jugador no encontrado",JOptionPane.ERROR_MESSAGE);
+            }
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

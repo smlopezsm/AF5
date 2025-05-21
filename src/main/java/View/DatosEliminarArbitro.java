@@ -1,11 +1,33 @@
 package View;
 
+import Controller.Controlador;
+import Controller.Controlador.ArbitroNoEncontradoException;
+import Model.Arbitro;
+import Model.Fecha;
+import javax.swing.JOptionPane;
+
+
 public class DatosEliminarArbitro extends javax.swing.JPanel {
 
-    public DatosEliminarArbitro() {
+    private Arbitro arbitroBuscado;
+    public DatosEliminarArbitro(Arbitro arbitroBuscado) {
+        this.arbitroBuscado = arbitroBuscado;
         initComponents();
     }
-
+    
+    
+    public void mostrar(Arbitro arbitroBuscado){
+                String nombre = arbitroBuscado.getNombre();
+                String apellido = arbitroBuscado.getApellido();
+                Fecha f = arbitroBuscado.getFechaNac();
+                int dia = f.getDia();
+                int mes = f.getMes();
+                int anio = f.getAnio();
+                String fnac = dia+"/"+mes+"/"+anio;
+                String nacionalidad = arbitroBuscado.getNacionalidad();
+                int tarjetasSacadas = arbitroBuscado.getTarjetasSacadas();
+                String internacional = arbitroBuscado.getInternacional() ? "Si":"No";
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -103,7 +125,13 @@ public class DatosEliminarArbitro extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        try{    
+               
+                Controlador.eliminarArbitro(arbitroBuscado);
+                JOptionPane.showMessageDialog(this,"Arbitro Eliminado exitosamente");
+            }catch (ArbitroNoEncontradoException e) {
+                JOptionPane.showMessageDialog(this,e.getMessage(),"Árbitro no encontrado",JOptionPane.ERROR_MESSAGE);
+            }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

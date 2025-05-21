@@ -1,6 +1,10 @@
 package View;
 
+import Controller.Controlador;
+import Controller.Controlador.JugadorNoEncontradoException;
+import Model.Jugador;
 import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
 
 public class EliminarJugador extends javax.swing.JPanel {
 
@@ -18,6 +22,11 @@ public class EliminarJugador extends javax.swing.JPanel {
         datos = new javax.swing.JPanel();
 
         jTextField1.setText("Nombre del jugador...");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -81,12 +90,27 @@ public class EliminarJugador extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        datos.removeAll();
-        datos.setLayout(new BorderLayout());
-        datos.add(new DatosEliminarJugador(),BorderLayout.CENTER);
-        this.revalidate();
-        this.repaint();
+        if (jTextField1.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Campo vacío", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try{
+                Jugador jugadorBuscado = Controlador.buscarJugador(jTextField1.getText());
+                datos.removeAll();
+                datos.setLayout(new BorderLayout());
+                datos.add(new DatosEliminarJugador(jugadorBuscado),BorderLayout.CENTER);
+                this.revalidate();
+                this.repaint();
+                DatosEliminarJugador dej = new DatosEliminarJugador(jugadorBuscado);
+                dej.mostrar(jugadorBuscado);
+            }catch (JugadorNoEncontradoException e) {
+                JOptionPane.showMessageDialog(this,e.getMessage(),"Jugador no encontrado",JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

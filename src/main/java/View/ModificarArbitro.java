@@ -1,11 +1,15 @@
 package View;
 
-public class ModificarArbitro extends javax.swing.JPanel {
+import Controller.Controlador;
+import Controller.Controlador.ArbitroNoEncontradoException;
+import Model.Arbitro;
+import Model.Fecha;
+import javax.swing.JOptionPane;
 
+public class ModificarArbitro extends javax.swing.JPanel {
     public ModificarArbitro() {
         initComponents();
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -19,7 +23,7 @@ public class ModificarArbitro extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         diaBox = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
-        AnioBox = new javax.swing.JComboBox<>();
+        anioBox = new javax.swing.JComboBox<>();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -28,7 +32,7 @@ public class ModificarArbitro extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         nacionalidadTxt = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
 
         jButton2.setText("Modificar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -52,10 +56,10 @@ public class ModificarArbitro extends javax.swing.JPanel {
             }
         });
 
-        AnioBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Año", "1950  ", "1951  ", "1952  ", "1953  ", "1954  ", "1955  ", "1956  ", "1957  ", "1958  ", "1959  ", "1960  ", "1961  ", "1962  ", "1963  ", "1964  ", "1965  ", "1966  ", "1967  ", "1968  ", "1969  ", "1970  ", "1971  ", "1972  ", "1973  ", "1974  ", "1975  ", "1976  ", "1977  ", "1978  ", "1979  ", "1980  ", "1981  ", "1982  ", "1983  ", "1984  ", "1985  ", "1986  ", "1987  ", "1988  ", "1989  ", "1990  ", "1991  ", "1992  ", "1993  ", "1994  ", "1995  ", "1996  ", "1997  ", "1998  ", "1999  ", "2000  ", "2001  ", "2002  ", "2003  ", "2004  ", "2005  ", "2006  ", "2007  ", "2008  ", "2009  ", "2010  ", "2011  ", "2012  ", "2013  ", "2014  ", "2015  ", "2016  ", "2017  ", "2018  ", "2019  ", "2020  ", "2021  ", "2022  ", "2023  ", "2024  ", "2025  ", "2026  ", "2027  ", "2028  ", "2029  ", "2030  ", "2031  ", "2032  ", "2033  ", "2034  ", "2035  ", "2036  ", "2037  ", "2038  ", "2039  ", "2040  ", "2041  ", "2042  ", "2043  ", "2044  ", "2045  ", "2046  ", "2047  ", "2048  ", "2049  ", "2050" }));
-        AnioBox.addActionListener(new java.awt.event.ActionListener() {
+        anioBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Año", "1950  ", "1951  ", "1952  ", "1953  ", "1954  ", "1955  ", "1956  ", "1957  ", "1958  ", "1959  ", "1960  ", "1961  ", "1962  ", "1963  ", "1964  ", "1965  ", "1966  ", "1967  ", "1968  ", "1969  ", "1970  ", "1971  ", "1972  ", "1973  ", "1974  ", "1975  ", "1976  ", "1977  ", "1978  ", "1979  ", "1980  ", "1981  ", "1982  ", "1983  ", "1984  ", "1985  ", "1986  ", "1987  ", "1988  ", "1989  ", "1990  ", "1991  ", "1992  ", "1993  ", "1994  ", "1995  ", "1996  ", "1997  ", "1998  ", "1999  ", "2000  ", "2001  ", "2002  ", "2003  ", "2004  ", "2005  ", "2006  ", "2007  ", "2008  ", "2009  ", "2010  ", "2011  ", "2012  ", "2013  ", "2014  ", "2015  ", "2016  ", "2017  ", "2018  ", "2019  ", "2020  ", "2021  ", "2022  ", "2023  ", "2024  ", "2025  ", "2026  ", "2027  ", "2028  ", "2029  ", "2030  ", "2031  ", "2032  ", "2033  ", "2034  ", "2035  ", "2036  ", "2037  ", "2038  ", "2039  ", "2040  ", "2041  ", "2042  ", "2043  ", "2044  ", "2045  ", "2046  ", "2047  ", "2048  ", "2049  ", "2050" }));
+        anioBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AnioBoxActionPerformed(evt);
+                anioBoxActionPerformed(evt);
             }
         });
 
@@ -77,10 +81,10 @@ public class ModificarArbitro extends javax.swing.JPanel {
 
         jTextField3.setText("Nombre del árbitro...");
 
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -101,7 +105,7 @@ public class ModificarArbitro extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jTextField3)
                         .addGap(81, 81, 81)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(122, 122, 122))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -118,7 +122,7 @@ public class ModificarArbitro extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(mesBox, 0, 109, Short.MAX_VALUE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(AnioBox, 0, 88, Short.MAX_VALUE))
+                            .addComponent(anioBox, 0, 88, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                             .addGap(222, 222, 222)
                             .addComponent(jTextField1)
@@ -146,7 +150,7 @@ public class ModificarArbitro extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnBuscar)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
@@ -171,7 +175,7 @@ public class ModificarArbitro extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(diaBox)
                         .addComponent(mesBox)
-                        .addComponent(AnioBox))
+                        .addComponent(anioBox))
                     .addGap(35, 35, 35)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -212,30 +216,67 @@ public class ModificarArbitro extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+            try{    
+                Arbitro arbitroBuscado = Controlador.buscarArbitro(jTextField3.getText());
+                String nombrearbitro = jTextField1.getText();
+                String apellidoarbitro = jTextField2.getText();
+                String nacionalidadArbitro = nacionalidadTxt.getText();
+                int diaNac = (int) diaBox.getSelectedIndex();
+                int mesNac = (int) mesBox.getSelectedIndex();
+                int anioNac = (int) anioBox.getSelectedIndex();
+                Boolean internacionalArbitro = (Boolean) jComboBox1.getSelectedItem();
+                int totaltarj = (int) jSpinner3.getValue();
+                Controlador.eliminarArbitro(arbitroBuscado);
+                Controlador.AgregarArbitro(nombrearbitro, apellidoarbitro, nacionalidadArbitro, diaNac, mesNac, anioNac, internacionalArbitro, totaltarj);
+                JOptionPane.showMessageDialog(this,"Arbitro Modificado exitosamente");
+            }catch (ArbitroNoEncontradoException e) {
+                JOptionPane.showMessageDialog(this,e.getMessage(),"Árbitro no encontrado",JOptionPane.ERROR_MESSAGE);
+            }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void diaBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diaBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_diaBoxActionPerformed
 
-    private void AnioBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnioBoxActionPerformed
+    private void anioBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anioBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_AnioBoxActionPerformed
+    }//GEN-LAST:event_anioBoxActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        if (jTextField3.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Campo vacío", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try{
+                Arbitro arbitroBuscado = Controlador.buscarArbitro(jTextField3.getText());
+                jTextField1.setText(arbitroBuscado.getNombre());
+                jTextField1.setEditable(false);
+                jTextField2.setText(arbitroBuscado.getApellido());
+                jTextField2.setEditable(false);
+                Fecha fechaNac = arbitroBuscado.getFechaNac();
+                diaBox.setSelectedItem(fechaNac.getDia());
+                diaBox.setEnabled(false);
+                mesBox.setSelectedItem(fechaNac.getMes());
+                mesBox.setEnabled(false);
+                anioBox.setSelectedItem(fechaNac.getAnio());
+                anioBox.setEnabled(false);
+                nacionalidadTxt.setText(arbitroBuscado.getNacionalidad());
+                nacionalidadTxt.setEditable(false);
+                jComboBox1.setSelectedItem(arbitroBuscado.getInternacional());
+                jSpinner3.setValue(arbitroBuscado.getTarjetasSacadas());  
+            }catch (ArbitroNoEncontradoException e) {
+                JOptionPane.showMessageDialog(this,e.getMessage(),"Árbitro no encontrado",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> AnioBox;
+    private javax.swing.JComboBox<String> anioBox;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JComboBox<String> diaBox;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;

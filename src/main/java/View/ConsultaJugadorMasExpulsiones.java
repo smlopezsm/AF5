@@ -12,7 +12,7 @@ public class ConsultaJugadorMasExpulsiones extends javax.swing.JPanel {
      
      model.addColumn("nombre");
      model.addColumn("equipo");
-     model.addColumn("posicion");
+     model.addColumn("posision");
       model.addColumn("Tarjetas rojas");
 
      
@@ -39,22 +39,17 @@ public class ConsultaJugadorMasExpulsiones extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         bg = new javax.swing.JPanel();
         jugadprExpulciones = new javax.swing.JLabel();
-        botonBuscar = new javax.swing.JButton();
         panelTabla = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
+        fondoBoton = new javax.swing.JPanel();
+        botonBuscar = new javax.swing.JButton();
 
         jugadprExpulciones.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jugadprExpulciones.setText("Jugador con mas expulsiones");
-
-        botonBuscar.setText("Buscar");
-        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonBuscarActionPerformed(evt);
-            }
-        });
 
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -81,33 +76,48 @@ public class ConsultaJugadorMasExpulsiones extends javax.swing.JPanel {
         });
         panelTabla.setViewportView(Tabla);
 
+        fondoBoton.setLayout(new java.awt.GridBagLayout());
+
+        botonBuscar.setText("Buscar");
+        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscarActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.ipady = 23;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
+        fondoBoton.add(botonBuscar, gridBagConstraints);
+
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bgLayout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addComponent(jugadprExpulciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(176, 176, 176))
+                    .addComponent(panelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(bgLayout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addComponent(botonBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                .addGap(107, 107, 107))
-            .addGroup(bgLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jugadprExpulciones)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(83, 83, 83)
+                .addComponent(fondoBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(103, 103, 103))
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgLayout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(jugadprExpulciones)
-                .addGap(37, 37, 37)
-                .addComponent(botonBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(6, 6, 6)
+                .addComponent(jugadprExpulciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(fondoBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(76, 76, 76)
+                .addComponent(panelTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -136,6 +146,7 @@ public class ConsultaJugadorMasExpulsiones extends javax.swing.JPanel {
     private javax.swing.JTable Tabla;
     private javax.swing.JPanel bg;
     private javax.swing.JButton botonBuscar;
+    private javax.swing.JPanel fondoBoton;
     private javax.swing.JLabel jugadprExpulciones;
     private javax.swing.JScrollPane panelTabla;
     // End of variables declaration//GEN-END:variables

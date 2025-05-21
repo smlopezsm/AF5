@@ -1,5 +1,12 @@
 package View;
 
+import Controller.Controlador;
+import Controller.Controlador.ArbitroNoEncontradoException;
+import Controller.Controlador.JugadorNoEncontradoException;
+import Model.Fecha;
+import Model.Jugador;
+import javax.swing.JOptionPane;
+
 public class ModificarJugador extends javax.swing.JPanel {
 
     public ModificarJugador() {
@@ -19,7 +26,7 @@ public class ModificarJugador extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         diaBox = new javax.swing.JComboBox<>();
         mesBox = new javax.swing.JComboBox<>();
-        AnioBox = new javax.swing.JComboBox<>();
+        anioBox = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         nacionalidadTxt = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -63,10 +70,10 @@ public class ModificarJugador extends javax.swing.JPanel {
 
         mesBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mes", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
 
-        AnioBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Año", "1950  ", "1951  ", "1952  ", "1953  ", "1954  ", "1955  ", "1956  ", "1957  ", "1958  ", "1959  ", "1960  ", "1961  ", "1962  ", "1963  ", "1964  ", "1965  ", "1966  ", "1967  ", "1968  ", "1969  ", "1970  ", "1971  ", "1972  ", "1973  ", "1974  ", "1975  ", "1976  ", "1977  ", "1978  ", "1979  ", "1980  ", "1981  ", "1982  ", "1983  ", "1984  ", "1985  ", "1986  ", "1987  ", "1988  ", "1989  ", "1990  ", "1991  ", "1992  ", "1993  ", "1994  ", "1995  ", "1996  ", "1997  ", "1998  ", "1999  ", "2000  ", "2001  ", "2002  ", "2003  ", "2004  ", "2005  ", "2006  ", "2007  ", "2008  ", "2009  ", "2010  ", "2011  ", "2012  ", "2013  ", "2014  ", "2015  ", "2016  ", "2017  ", "2018  ", "2019  ", "2020  ", "2021  ", "2022  ", "2023  ", "2024  ", "2025  ", "2026  ", "2027  ", "2028  ", "2029  ", "2030  ", "2031  ", "2032  ", "2033  ", "2034  ", "2035  ", "2036  ", "2037  ", "2038  ", "2039  ", "2040  ", "2041  ", "2042  ", "2043  ", "2044  ", "2045  ", "2046  ", "2047  ", "2048  ", "2049  ", "2050" }));
-        AnioBox.addActionListener(new java.awt.event.ActionListener() {
+        anioBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Año", "1950  ", "1951  ", "1952  ", "1953  ", "1954  ", "1955  ", "1956  ", "1957  ", "1958  ", "1959  ", "1960  ", "1961  ", "1962  ", "1963  ", "1964  ", "1965  ", "1966  ", "1967  ", "1968  ", "1969  ", "1970  ", "1971  ", "1972  ", "1973  ", "1974  ", "1975  ", "1976  ", "1977  ", "1978  ", "1979  ", "1980  ", "1981  ", "1982  ", "1983  ", "1984  ", "1985  ", "1986  ", "1987  ", "1988  ", "1989  ", "1990  ", "1991  ", "1992  ", "1993  ", "1994  ", "1995  ", "1996  ", "1997  ", "1998  ", "1999  ", "2000  ", "2001  ", "2002  ", "2003  ", "2004  ", "2005  ", "2006  ", "2007  ", "2008  ", "2009  ", "2010  ", "2011  ", "2012  ", "2013  ", "2014  ", "2015  ", "2016  ", "2017  ", "2018  ", "2019  ", "2020  ", "2021  ", "2022  ", "2023  ", "2024  ", "2025  ", "2026  ", "2027  ", "2028  ", "2029  ", "2030  ", "2031  ", "2032  ", "2033  ", "2034  ", "2035  ", "2036  ", "2037  ", "2038  ", "2039  ", "2040  ", "2041  ", "2042  ", "2043  ", "2044  ", "2045  ", "2046  ", "2047  ", "2048  ", "2049  ", "2050" }));
+        anioBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AnioBoxActionPerformed(evt);
+                anioBoxActionPerformed(evt);
             }
         });
 
@@ -120,7 +127,7 @@ public class ModificarJugador extends javax.swing.JPanel {
                         .addGap(6, 6, 6)
                         .addComponent(mesBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(6, 6, 6)
-                        .addComponent(AnioBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(anioBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(138, 138, 138)
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -195,7 +202,7 @@ public class ModificarJugador extends javax.swing.JPanel {
                         .addGap(5, 5, 5))
                     .addComponent(diaBox)
                     .addComponent(mesBox)
-                    .addComponent(AnioBox))
+                    .addComponent(anioBox))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -249,7 +256,25 @@ public class ModificarJugador extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+            try{
+                Jugador jugadorBuscado = Controlador.buscarJugador(jTextField3.getText());
+                String nombreJugador = jTextField1.getText();
+                String apellidoJugador = jTextField2.getText();
+                String nacionalidadJugador = nacionalidadTxt.getText();
+                int diaNac = (int) diaBox.getSelectedIndex();
+                int mesNac = (int) mesBox.getSelectedIndex();
+                int anioNac = (int) anioBox.getSelectedIndex();
+                String clubActual = (String) equipoBox.getSelectedItem();
+                int posicion = jComboBox1.getSelectedIndex();
+                int cantGoles=(int) jSpinner1.getValue();
+                int tarjR=(int) jSpinner4.getValue();
+                int tarjA=(int) jSpinner3.getValue();
+                Controlador.eliminarJugador(jugadorBuscado);
+                Controlador.AgregarJugador(nombreJugador, apellidoJugador, nacionalidadJugador, diaNac, mesNac, anioNac, clubActual, posicion, cantGoles,tarjR,tarjA);
+                JOptionPane.showMessageDialog(this,"Jugador Modificado exitosamente");
+            }catch (JugadorNoEncontradoException e) {
+                JOptionPane.showMessageDialog(this,e.getMessage(),"Jugador no encontrado",JOptionPane.ERROR_MESSAGE);
+            }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -260,21 +285,49 @@ public class ModificarJugador extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_diaBoxActionPerformed
 
-    private void AnioBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnioBoxActionPerformed
+    private void anioBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anioBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_AnioBoxActionPerformed
+    }//GEN-LAST:event_anioBoxActionPerformed
 
     private void equipoBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equipoBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_equipoBoxActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        if (jTextField3.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Campo vacío", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try{
+                Jugador jugadorBuscado = Controlador.buscarJugador(jTextField3.getText());
+                jTextField1.setText(jugadorBuscado.getNombre());
+                jTextField1.setEditable(false);
+                jTextField2.setText(jugadorBuscado.getApellido());
+                jTextField2.setEditable(false);
+                Fecha fechaNac = jugadorBuscado.getFechaNac();
+                diaBox.setSelectedItem(fechaNac.getDia());
+                diaBox.setEnabled(false);
+                mesBox.setSelectedItem(fechaNac.getMes());
+                mesBox.setEnabled(false);
+                anioBox.setSelectedItem(fechaNac.getAnio());
+                anioBox.setEnabled(false);
+                nacionalidadTxt.setText(jugadorBuscado.getNacionalidad());
+                nacionalidadTxt.setEditable(false);
+                equipoBox.setSelectedItem(jugadorBuscado.getClubActual());
+                equipoBox.setEnabled(false);
+                jComboBox1.setSelectedItem(jugadorBuscado.getPosicion());
+                jSpinner1.setValue(jugadorBuscado.getGoles());
+                jSpinner3.setValue(jugadorBuscado.getTarjetasAmarillas());
+                jSpinner4.setValue(jugadorBuscado.getTarjetasRojas());
+                jSpinner4.setEnabled(false);
+            }catch (JugadorNoEncontradoException e) {
+                JOptionPane.showMessageDialog(this,e.getMessage(),"Jugador no encontrado",JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> AnioBox;
+    private javax.swing.JComboBox<String> anioBox;
     private javax.swing.JComboBox<String> diaBox;
     private javax.swing.JComboBox<String> equipoBox;
     private javax.swing.JButton jButton1;
