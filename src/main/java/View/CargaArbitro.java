@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Controlador;
+import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 
 public class CargaArbitro extends javax.swing.JPanel {
@@ -8,6 +9,8 @@ public class CargaArbitro extends javax.swing.JPanel {
     public CargaArbitro() {
         initComponents();
     }
+    
+    private Controlador controlador;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -221,18 +224,76 @@ public class CargaArbitro extends javax.swing.JPanel {
     }//GEN-LAST:event_LimpiarArbitroBtnActionPerformed
 
     private void AgregarArbitroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarArbitroBtnActionPerformed
-        String apellidoarbitro = txtApellidoArbitro.getText();
+        try{
         String nombrearbitro = txtNombreArbitro.getText();
+        if (nombrearbitro.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "¡Ingrese Nombre!");
+                return;
+        }
+        
+        String apellidoarbitro = txtApellidoArbitro.getText();
+        if (apellidoarbitro.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "¡Ingrese Apellido!");
+                return;
+        }
+        
         String nacionalidadArbitro = txtNacionalidadArbitro.getText();
+        if (nacionalidadArbitro.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "¡Ingrese Nacionalidad!");
+                return;
+        }
+        
         int diaNac = (int) diaBox.getSelectedIndex();
         int mesNac = (int) mesBox.getSelectedIndex();
         int anioNac = (int) AnioBox.getSelectedIndex();
-        Boolean internacionalArbitro = (Boolean) InternacionalBox.getSelectedItem();
-        int totaltarj = (int) TotalTarjetasSpn.getValue();
+        if(diaNac==0 || mesNac==0 || anioNac==0){
+            JOptionPane.showMessageDialog(this,"Ingrese una Fecha Valida");
+            return;
+        }
+        
+        int internacional = InternacionalBox.getSelectedIndex();
+            Boolean internacionalArbitro = null;
 
-        Controlador.AgregarArbitro(nombrearbitro, apellidoarbitro, nacionalidadArbitro, diaNac, mesNac, anioNac, internacionalArbitro, totaltarj);
+            switch (internacional) {
+                case 1:
+                    internacionalArbitro = true;
+                    break;
+                case 2:
+                    internacionalArbitro = false;
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(this, "Seleccione si el árbitro es internacional o no.");
+                    return;
+            }
+
+        int totaltarj = (int) TotalTarjetasSpn.getValue();
+        if(totaltarj<0){
+            JOptionPane.showMessageDialog(this,"El total de las tarjetas no puede ser menor a 0");
+            return;
+        }
+        
+        Controlador controladorAux=new Controlador();
+       
+        controladorAux.setNombrePersona(nombrearbitro);
+        controladorAux.setApellidoPersona(apellidoarbitro);
+        controladorAux.setNacionalidadPersona(nacionalidadArbitro);
+        controladorAux.setFechaNacimientoPersona(diaNac, mesNac, anioNac);
+        controladorAux.setInternacional(internacionalArbitro);
+        controladorAux.setTarjetasSacadasArbitro(totaltarj);
+        controladorAux.AgregarArbitroALaLista(controladorAux.getArbitro());
+
         JOptionPane.showMessageDialog(this, "Arbitro Cargado Correctamente");
-        //controlar todos los campos con try catch y solo mandar a AgregarArbitro si todos los campos están completos y si ese arbitro no existe todavía
+        
+         } catch (ClassCastException e) {
+            JOptionPane.showMessageDialog(this, "Error de conversión de datos: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Formato numérico inválido: " + e.getMessage());
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Algunos campos no fueron seleccionados correctamente.");
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage());
+        }
+       
     }//GEN-LAST:event_AgregarArbitroBtnActionPerformed
 
     private void mesBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mesBoxActionPerformed

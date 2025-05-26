@@ -1,16 +1,19 @@
 package View;
-
+import Controller.Controlador;
 import java.awt.BorderLayout;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class Pantalla extends javax.swing.JFrame {
-    
-    public Pantalla() {
+    private Controlador controladoralista= new Controlador();
+    public Pantalla(Controlador controladoralista) {
         initComponents();
         setDate();
+        this.controladoralista=controladoralista;
     }
+
+
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -286,7 +289,7 @@ public class Pantalla extends javax.swing.JFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         contenedorConsulta.removeAll();
         contenedorConsulta.setLayout(new BorderLayout());
-        contenedorConsulta.add(new Modificar(), BorderLayout.CENTER);
+        contenedorConsulta.add(new Modificar(controladoralista), BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -294,7 +297,7 @@ public class Pantalla extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         contenedorConsulta.removeAll();
         contenedorConsulta.setLayout(new BorderLayout());
-        contenedorConsulta.add(new Eliminar(), BorderLayout.CENTER);
+        contenedorConsulta.add(new Eliminar(controladoralista), BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -311,7 +314,7 @@ public class Pantalla extends javax.swing.JFrame {
         // TODO add your handling code here:
          contenedorConsulta.removeAll();
         contenedorConsulta.setLayout(new BorderLayout());
-        contenedorConsulta.add(new MostrarPersonas(), BorderLayout.CENTER);
+        contenedorConsulta.add(new MostrarPersonas(controladoralista), BorderLayout.CENTER);
        this.revalidate();
        this.repaint();
     }//GEN-LAST:event_btnMostrarActionPerformed

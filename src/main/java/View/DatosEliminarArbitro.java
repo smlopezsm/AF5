@@ -4,29 +4,39 @@ import Controller.Controlador;
 import Controller.Controlador.ArbitroNoEncontradoException;
 import Model.Arbitro;
 import Model.Fecha;
+import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 
 
 public class DatosEliminarArbitro extends javax.swing.JPanel {
 
     private Arbitro arbitroBuscado;
-    public DatosEliminarArbitro(Arbitro arbitroBuscado) {
+    private Controlador controladorAux = new Controlador();
+    public DatosEliminarArbitro(Arbitro arbitroBuscado,Controlador controladorAux) {
         this.arbitroBuscado = arbitroBuscado;
+        this.controladorAux=controladorAux;
         initComponents();
     }
     
     
     public void mostrar(Arbitro arbitroBuscado){
-                String nombre = arbitroBuscado.getNombre();
-                String apellido = arbitroBuscado.getApellido();
-                Fecha f = arbitroBuscado.getFechaNac();
-                int dia = f.getDia();
-                int mes = f.getMes();
-                int anio = f.getAnio();
+              
+                String nombre = controladorAux.getNombreArbitroBuscado(arbitroBuscado);
+                String apellido = controladorAux.getApellidoArbitroBuscado(arbitroBuscado);
+                int dia = controladorAux.getDiaNacimientoArbitroBuscado(arbitroBuscado);
+                int mes = controladorAux.getMesNacimientoArbitroBuscado(arbitroBuscado);
+                int anio = controladorAux.getAnioNacimientoArbitroBuscado(arbitroBuscado);
                 String fnac = dia+"/"+mes+"/"+anio;
-                String nacionalidad = arbitroBuscado.getNacionalidad();
-                int tarjetasSacadas = arbitroBuscado.getTarjetasSacadas();
-                String internacional = arbitroBuscado.getInternacional() ? "Si":"No";
+                String nacionalidad = controladorAux.getNacionalidadArbitroBuscado(arbitroBuscado);
+                int tarjetasSacadas = controladorAux.getTarjetasSacadasArbitroBuscado(arbitroBuscado);
+                String internacional = controladorAux.getArbitroInternacionalBuscado(arbitroBuscado);
+                
+                jLabel1.setText("Nombre: " + nombre);
+                jLabel2.setText("Apellido: " + apellido);
+                jLabel3.setText("Fecha de Nacimiento: " + fnac);
+                jLabel4.setText("Nacionalidad: " + nacionalidad);
+                jLabel5.setText("Tarjetas Sacadas: " + tarjetasSacadas);
+                jLabel6.setText("Internacional: " + internacional);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -126,9 +136,12 @@ public class DatosEliminarArbitro extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try{    
-               
-                Controlador.eliminarArbitro(arbitroBuscado);
-                JOptionPane.showMessageDialog(this,"Arbitro Eliminado exitosamente");
+            controladorAux.eliminarArbitro(arbitroBuscado);
+            JOptionPane.showMessageDialog(this,"Arbitro Eliminado exitosamente");
+            jPanel1.removeAll();
+            jPanel1.setLayout(new BorderLayout());
+            this.revalidate();
+            this.repaint();
             }catch (ArbitroNoEncontradoException e) {
                 JOptionPane.showMessageDialog(this,e.getMessage(),"Árbitro no encontrado",JOptionPane.ERROR_MESSAGE);
             }

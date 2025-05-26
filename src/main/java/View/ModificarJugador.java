@@ -1,18 +1,20 @@
 package View;
 
 import Controller.Controlador;
-import Controller.Controlador.ArbitroNoEncontradoException;
 import Controller.Controlador.JugadorNoEncontradoException;
-import Model.Fecha;
 import Model.Jugador;
 import javax.swing.JOptionPane;
 
 public class ModificarJugador extends javax.swing.JPanel {
 
-    public ModificarJugador() {
+    private Controlador controladorAux = new Controlador();
+    private Jugador jugadorBuscado;
+    
+    public ModificarJugador(Controlador controladorAux) {
+        this.controladorAux=controladorAux;
         initComponents();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -256,25 +258,13 @@ public class ModificarJugador extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-            try{
-                Jugador jugadorBuscado = Controlador.buscarJugador(jTextField3.getText());
-                String nombreJugador = jTextField1.getText();
-                String apellidoJugador = jTextField2.getText();
-                String nacionalidadJugador = nacionalidadTxt.getText();
-                int diaNac = (int) diaBox.getSelectedIndex();
-                int mesNac = (int) mesBox.getSelectedIndex();
-                int anioNac = (int) anioBox.getSelectedIndex();
-                String clubActual = (String) equipoBox.getSelectedItem();
                 int posicion = jComboBox1.getSelectedIndex();
                 int cantGoles=(int) jSpinner1.getValue();
-                int tarjR=(int) jSpinner4.getValue();
                 int tarjA=(int) jSpinner3.getValue();
-                Controlador.eliminarJugador(jugadorBuscado);
-                Controlador.AgregarJugador(nombreJugador, apellidoJugador, nacionalidadJugador, diaNac, mesNac, anioNac, clubActual, posicion, cantGoles,tarjR,tarjA);
+                controladorAux.setPosicionJugadorBuscado(jugadorBuscado,posicion);
+                controladorAux.setGolesJugadorBuscado(jugadorBuscado,cantGoles);
+                controladorAux.setTarjetasAmarillasJugadorBuscado(jugadorBuscado,tarjA);
                 JOptionPane.showMessageDialog(this,"Jugador Modificado exitosamente");
-            }catch (JugadorNoEncontradoException e) {
-                JOptionPane.showMessageDialog(this,e.getMessage(),"Jugador no encontrado",JOptionPane.ERROR_MESSAGE);
-            }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -298,33 +288,38 @@ public class ModificarJugador extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Campo vacío", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             try{
-                Jugador jugadorBuscado = Controlador.buscarJugador(jTextField3.getText());
-                jTextField1.setText(jugadorBuscado.getNombre());
+                this.jugadorBuscado = controladorAux.buscarJugador(jTextField3.getText());
+                jTextField1.setText(controladorAux.getNombreJugadorBuscado(jugadorBuscado));
                 jTextField1.setEditable(false);
-                jTextField2.setText(jugadorBuscado.getApellido());
+                jTextField2.setText(controladorAux.getApellidoJugadorBuscado(jugadorBuscado));
                 jTextField2.setEditable(false);
-                Fecha fechaNac = jugadorBuscado.getFechaNac();
-                diaBox.setSelectedItem(fechaNac.getDia());
+                diaBox.setSelectedIndex(controladorAux.getDiaNacimientoJugadorBuscado(jugadorBuscado));
                 diaBox.setEnabled(false);
-                mesBox.setSelectedItem(fechaNac.getMes());
+                mesBox.setSelectedIndex(controladorAux.getMesNacimientoJugadorBuscado(jugadorBuscado));
                 mesBox.setEnabled(false);
-                anioBox.setSelectedItem(fechaNac.getAnio());
+                int anioNacimiento = controladorAux.getAnioNacimientoJugadorBuscado(jugadorBuscado);
+                for (int i = 0; i < anioBox.getItemCount(); i++) {
+                    if (anioBox.getItemAt(i).trim().equals(String.valueOf(anioNacimiento))) {
+                        anioBox.setSelectedIndex(i);
+                        break;
+                    }
+                }
                 anioBox.setEnabled(false);
-                nacionalidadTxt.setText(jugadorBuscado.getNacionalidad());
+                nacionalidadTxt.setText(controladorAux.getNacionalidadJugadorBuscado(jugadorBuscado));
                 nacionalidadTxt.setEditable(false);
-                equipoBox.setSelectedItem(jugadorBuscado.getClubActual());
+                equipoBox.setSelectedItem(controladorAux.getClubActualJugadorBuscado(jugadorBuscado));
                 equipoBox.setEnabled(false);
-                jComboBox1.setSelectedItem(jugadorBuscado.getPosicion());
-                jSpinner1.setValue(jugadorBuscado.getGoles());
-                jSpinner3.setValue(jugadorBuscado.getTarjetasAmarillas());
-                jSpinner4.setValue(jugadorBuscado.getTarjetasRojas());
+                jComboBox1.setSelectedItem(controladorAux.getPosicionJugadorBuscado(jugadorBuscado));
+                jSpinner1.setValue(controladorAux.getGolesJugadorBuscado(jugadorBuscado));
+                jSpinner3.setValue(controladorAux.getTarjetasAmarillasJugadorBuscado(jugadorBuscado));
+                jSpinner4.setValue(controladorAux.getTarjetasRojasJugadorBuscado(jugadorBuscado));
                 jSpinner4.setEnabled(false);
             }catch (JugadorNoEncontradoException e) {
+                jTextField3.setText("");
                 JOptionPane.showMessageDialog(this,e.getMessage(),"Jugador no encontrado",JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> anioBox;

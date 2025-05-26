@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Controlador;
+import java.awt.HeadlessException;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -13,6 +14,7 @@ public class CargaJugador extends javax.swing.JPanel {
     public CargaJugador() {
         initComponents();
     }
+    private Controlador controlador;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -86,7 +88,7 @@ public class CargaJugador extends javax.swing.JPanel {
 
         jLabel5.setText("Club Actual:");
 
-        equipoBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boca Juniors", "River Plate", "Real Madrid", "Barcelona Fc", "San Martin de San Juan", "Estudiantes", "Juventud Unida", "Defensores", "Barracas Central", "Sol de Mayo" }));
+        equipoBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Boca Juniors", "River Plate", "Real Madrid", "Barcelona Fc", "San Martin de San Juan", "Estudiantes", "Juventud Unida", "Defensores", "Barracas Central", "Sol de Mayo" }));
         equipoBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 equipoBoxActionPerformed(evt);
@@ -250,23 +252,87 @@ public class CargaJugador extends javax.swing.JPanel {
     }//GEN-LAST:event_txtApellidoJugadorActionPerformed
 
     private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
-    
-    String nombreJgdor=txtNombrejugador.getText();
-    String apeJgdor=txtApellidoJugador.getText();
-    String nacioJgdor=txtNacionalidadJugador.getText();
-    int diaNac=(int) diaBox.getSelectedIndex();
-    int mesNac=(int) mesBox.getSelectedIndex();
-    int anioNac=(int) AnioBox.getSelectedIndex();
-    String equipo=(String) equipoBox.getSelectedItem();
-    int posicion= PosicionJugadorBox.getSelectedIndex();
-    int cantgoles=(int) CantGolesSpn.getValue();
-    int tarjR=(int) TarjetasRojasJugadorspn.getValue();
-    int tarjA=(int) TarjetasAmarillasJugadorSpn.getValue();
-    
-    Controlador.AgregarJugador(nombreJgdor,apeJgdor,nacioJgdor,diaNac,mesNac,anioNac,equipo,posicion,cantgoles,tarjR,tarjA);
-    JOptionPane.showMessageDialog(this,"Jugador Cargado Correctamente");
-    //controlar todos los campos con try catch y solo mandar a AgregarJugador si todos los campos están completos y si ese jugador no existe todavía
-    
+
+        try {
+            String nombreJgdor = txtNombrejugador.getText();
+            if (nombreJgdor.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "¡Ingrese Nombre!");
+                return;
+            }
+            String apeJgdor = txtApellidoJugador.getText();
+            if (apeJgdor.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "¡Ingrese Apellido!");
+                return;
+            }
+            String nacioJgdor = txtNacionalidadJugador.getText();
+            if (nacioJgdor.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "¡Ingrese Nacionalidad!");
+                return;
+            }
+
+            int diaNac = (int) diaBox.getSelectedIndex();
+            int mesNac = (int) mesBox.getSelectedIndex();
+            int anioNac = (int) AnioBox.getSelectedIndex();
+
+            if (diaNac == 0 || mesNac == 0 || anioNac == 0) {
+                JOptionPane.showMessageDialog(this, "¡Ingrese una Fecha de Nacimiento Valida!");
+                return;
+            }
+
+            String equipo = equipoBox.getSelectedItem().toString();
+            if(equipoBox.getSelectedItem().equals("-")){
+                JOptionPane.showMessageDialog(this,"Seleccione un Equipo");
+                return;
+            }
+
+            int posicion = (int) PosicionJugadorBox.getSelectedIndex();
+
+            if (PosicionJugadorBox.getSelectedIndex()==0) {
+                JOptionPane.showMessageDialog(this, "Seleccione una posicion Valida");
+                return;
+            }
+
+            int cantgoles = (int) CantGolesSpn.getValue();
+            if (cantgoles < 0) {
+                JOptionPane.showMessageDialog(this, "¡Los goles no pueden ser menores a 0!");
+                return;
+            }
+
+            int tarjR = (int) TarjetasRojasJugadorspn.getValue();
+            if (tarjR < 0) {
+                JOptionPane.showMessageDialog(this, "¡Las Tarjetas Rojas no pueden ser menores a 0!");
+                return;
+            }
+
+            int tarjA = (int) TarjetasAmarillasJugadorSpn.getValue();
+            if (tarjA < 0) {
+                JOptionPane.showMessageDialog(this, "¡Las Tarjetas Amarillas no pueden ser menores a 0!");
+                return;
+            }
+
+            Controlador controladorAux = new Controlador();
+
+            controladorAux.setNombrePersona(nombreJgdor);
+            controladorAux.setApellidoPersona(apeJgdor);
+            controladorAux.setNacionalidadPersona(nacioJgdor);
+            controladorAux.setFechaNacimientoPersona(diaNac, mesNac, anioNac);
+            controladorAux.setClubActualJugador(equipo);
+            controladorAux.setPosicionJugador(posicion);
+            controladorAux.setGolesJugador(cantgoles);
+            controladorAux.setTarjetasRojasJugador(tarjR);
+            controladorAux.setTarjetasAmarillasJugador(tarjA);
+
+            controladorAux.AgregarJugadorALaLista(controladorAux.getJugador());
+            JOptionPane.showMessageDialog(this, "Jugador Cargado Correctamente");
+        } catch (ClassCastException e) {
+            JOptionPane.showMessageDialog(this, "Error de conversión de datos: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Formato numérico inválido: " + e.getMessage());
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Algunos campos no fueron seleccionados correctamente.");
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage());
+        }
     }//GEN-LAST:event_BtnAgregarActionPerformed
 
     private void equipoBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equipoBoxActionPerformed
@@ -350,7 +416,7 @@ public class CargaJugador extends javax.swing.JPanel {
     public JTextField getTxtNombrejugador() {
         return txtNombrejugador;
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> AnioBox;

@@ -3,13 +3,18 @@ package View;
 import Controller.Controlador;
 import Controller.Controlador.ArbitroNoEncontradoException;
 import Model.Arbitro;
-import Model.Fecha;
 import javax.swing.JOptionPane;
 
 public class ModificarArbitro extends javax.swing.JPanel {
-    public ModificarArbitro() {
+    
+    
+    private Controlador controladorAux = new Controlador();
+    private Arbitro arbitroBuscado;
+    public ModificarArbitro(Controlador controladorAux) {
+        this.controladorAux=controladorAux;
         initComponents();
     }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -216,22 +221,17 @@ public class ModificarArbitro extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-            try{    
-                Arbitro arbitroBuscado = Controlador.buscarArbitro(jTextField3.getText());
-                String nombrearbitro = jTextField1.getText();
-                String apellidoarbitro = jTextField2.getText();
-                String nacionalidadArbitro = nacionalidadTxt.getText();
-                int diaNac = (int) diaBox.getSelectedIndex();
-                int mesNac = (int) mesBox.getSelectedIndex();
-                int anioNac = (int) anioBox.getSelectedIndex();
-                Boolean internacionalArbitro = (Boolean) jComboBox1.getSelectedItem();
-                int totaltarj = (int) jSpinner3.getValue();
-                Controlador.eliminarArbitro(arbitroBuscado);
-                Controlador.AgregarArbitro(nombrearbitro, apellidoarbitro, nacionalidadArbitro, diaNac, mesNac, anioNac, internacionalArbitro, totaltarj);
-                JOptionPane.showMessageDialog(this,"Arbitro Modificado exitosamente");
-            }catch (ArbitroNoEncontradoException e) {
-                JOptionPane.showMessageDialog(this,e.getMessage(),"Árbitro no encontrado",JOptionPane.ERROR_MESSAGE);
-            }
+        String seleccion = (String) jComboBox1.getSelectedItem();
+        Boolean internacionalArbitro = null;
+        if ("Si".equals(seleccion)) {
+            internacionalArbitro = true;
+        } else if ("No".equals(seleccion)) {
+            internacionalArbitro = false;
+        }
+        int totalTarj = (int) jSpinner3.getValue();
+        controladorAux.setInternacionalBuscado(arbitroBuscado,internacionalArbitro);
+        controladorAux.setTarjetasSacadasArbitroBuscado(arbitroBuscado,totalTarj);
+        JOptionPane.showMessageDialog(this,"Arbitro Modificado exitosamente");          
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void diaBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diaBoxActionPerformed
@@ -251,23 +251,29 @@ public class ModificarArbitro extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Campo vacío", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             try{
-                Arbitro arbitroBuscado = Controlador.buscarArbitro(jTextField3.getText());
-                jTextField1.setText(arbitroBuscado.getNombre());
+                this.arbitroBuscado = controladorAux.buscarArbitro(jTextField3.getText());
+                jTextField1.setText(controladorAux.getNombreArbitroBuscado(arbitroBuscado));
                 jTextField1.setEditable(false);
-                jTextField2.setText(arbitroBuscado.getApellido());
+                jTextField2.setText(controladorAux.getApellidoArbitroBuscado(arbitroBuscado));
                 jTextField2.setEditable(false);
-                Fecha fechaNac = arbitroBuscado.getFechaNac();
-                diaBox.setSelectedItem(fechaNac.getDia());
+                diaBox.setSelectedIndex(controladorAux.getDiaNacimientoArbitroBuscado(arbitroBuscado));
                 diaBox.setEnabled(false);
-                mesBox.setSelectedItem(fechaNac.getMes());
+                mesBox.setSelectedIndex(controladorAux.getMesNacimientoArbitroBuscado(arbitroBuscado));
                 mesBox.setEnabled(false);
-                anioBox.setSelectedItem(fechaNac.getAnio());
+                int anioNacimiento = controladorAux.getAnioNacimientoArbitroBuscado(arbitroBuscado);
+                for (int i = 0; i < anioBox.getItemCount(); i++) {
+                    if (anioBox.getItemAt(i).trim().equals(String.valueOf(anioNacimiento))) {
+                        anioBox.setSelectedIndex(i);
+                        break;
+                    }
+                }
                 anioBox.setEnabled(false);
-                nacionalidadTxt.setText(arbitroBuscado.getNacionalidad());
-                nacionalidadTxt.setEditable(false);
-                jComboBox1.setSelectedItem(arbitroBuscado.getInternacional());
-                jSpinner3.setValue(arbitroBuscado.getTarjetasSacadas());  
+                nacionalidadTxt.setText(controladorAux.getNacionalidadArbitroBuscado(arbitroBuscado));
+                nacionalidadTxt.setEnabled(false);
+                jComboBox1.setSelectedItem(controladorAux.getArbitroInternacionalBuscado(arbitroBuscado));
+                jSpinner3.setValue(controladorAux.getTarjetasSacadasArbitroBuscado(arbitroBuscado)); 
             }catch (ArbitroNoEncontradoException e) {
+                jTextField3.setText("");
                 JOptionPane.showMessageDialog(this,e.getMessage(),"Árbitro no encontrado",JOptionPane.ERROR_MESSAGE);
             }
         }

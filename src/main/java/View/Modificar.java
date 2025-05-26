@@ -1,11 +1,15 @@
 package View;
 
+import Controller.Controlador;
 import java.awt.BorderLayout;
 
 public class Modificar extends javax.swing.JPanel {
 
-    public Modificar() {
+    private Controlador controladoraLista=new Controlador();
+    
+    public Modificar(Controlador controladoraLista) {
         initComponents();
+        this.controladoraLista=controladoraLista;
     }
 
     @SuppressWarnings("unchecked")
@@ -80,7 +84,10 @@ public class Modificar extends javax.swing.JPanel {
     private void btnArbitroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArbitroActionPerformed
         panelDatosModi.removeAll();
         panelDatosModi.setLayout(new BorderLayout());
-        panelDatosModi.add(new ModificarArbitro(), BorderLayout.CENTER);
+        //
+        controladoraLista.imprimirArbitros();
+        //
+        panelDatosModi.add(new ModificarArbitro(controladoraLista), BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_btnArbitroActionPerformed
@@ -88,7 +95,10 @@ public class Modificar extends javax.swing.JPanel {
     private void btnJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugadorActionPerformed
         panelDatosModi.removeAll();
         panelDatosModi.setLayout(new BorderLayout());
-        panelDatosModi.add(new ModificarJugador(), BorderLayout.CENTER);
+        //
+        controladoraLista.imprimirJugadores();
+        //
+        panelDatosModi.add(new ModificarJugador(controladoraLista), BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_btnJugadorActionPerformed

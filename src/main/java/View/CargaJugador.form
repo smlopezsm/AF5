@@ -377,17 +377,18 @@
     <Component class="javax.swing.JComboBox" name="equipoBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="10">
-            <StringItem index="0" value="Boca Juniors"/>
-            <StringItem index="1" value="River Plate"/>
-            <StringItem index="2" value="Real Madrid"/>
-            <StringItem index="3" value="Barcelona Fc"/>
-            <StringItem index="4" value="San Martin de San Juan"/>
-            <StringItem index="5" value="Estudiantes"/>
-            <StringItem index="6" value="Juventud Unida"/>
-            <StringItem index="7" value="Defensores"/>
-            <StringItem index="8" value="Barracas Central"/>
-            <StringItem index="9" value="Sol de Mayo"/>
+          <StringArray count="11">
+            <StringItem index="0" value="-"/>
+            <StringItem index="1" value="Boca Juniors"/>
+            <StringItem index="2" value="River Plate"/>
+            <StringItem index="3" value="Real Madrid"/>
+            <StringItem index="4" value="Barcelona Fc"/>
+            <StringItem index="5" value="San Martin de San Juan"/>
+            <StringItem index="6" value="Estudiantes"/>
+            <StringItem index="7" value="Juventud Unida"/>
+            <StringItem index="8" value="Defensores"/>
+            <StringItem index="9" value="Barracas Central"/>
+            <StringItem index="10" value="Sol de Mayo"/>
           </StringArray>
         </Property>
       </Properties>

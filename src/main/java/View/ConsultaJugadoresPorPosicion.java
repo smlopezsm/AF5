@@ -50,7 +50,7 @@ public class ConsultaJugadoresPorPosicion extends javax.swing.JPanel {
         tabla = new javax.swing.JTable();
 
         labelPosicion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        labelPosicion.setText("ingrese la posision");
+        labelPosicion.setText("ingrese la posición");
 
         posiciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arquero", "Defensor", "Mediocampista", "Delantero" }));
         posiciones.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +125,7 @@ public class ConsultaJugadoresPorPosicion extends javax.swing.JPanel {
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(bgLayout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addComponent(posiciones, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))

@@ -1,11 +1,14 @@
 package View;
 
+import Controller.Controlador;
 import java.awt.BorderLayout;
 
 public class Eliminar extends javax.swing.JPanel {
 
-    public Eliminar() {
+    private Controlador controladoraLista=new Controlador();
+    public Eliminar(Controlador controladoraLista) {
         initComponents();
+        this.controladoraLista=controladoraLista;
     }
 
     @SuppressWarnings("unchecked")
@@ -82,7 +85,7 @@ public class Eliminar extends javax.swing.JPanel {
     private void btnJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugadorActionPerformed
         panelDatosElim.removeAll();
         panelDatosElim.setLayout(new BorderLayout());
-        panelDatosElim.add(new EliminarJugador(), BorderLayout.CENTER);
+        panelDatosElim.add(new EliminarJugador(controladoraLista), BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_btnJugadorActionPerformed
@@ -90,7 +93,7 @@ public class Eliminar extends javax.swing.JPanel {
     private void btnArbitroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArbitroActionPerformed
         panelDatosElim.removeAll();
         panelDatosElim.setLayout(new BorderLayout());
-        panelDatosElim.add(new EliminarArbitro(), BorderLayout.CENTER);
+        panelDatosElim.add(new EliminarArbitro(controladoraLista), BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_btnArbitroActionPerformed

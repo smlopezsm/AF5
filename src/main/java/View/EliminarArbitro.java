@@ -8,8 +8,10 @@ import javax.swing.JOptionPane;
 
 public class EliminarArbitro extends javax.swing.JPanel {
 
-    public EliminarArbitro() {
+    private Controlador controladorAux=new Controlador();
+    public EliminarArbitro(Controlador controladorAux) {
         initComponents();
+        this.controladorAux=controladorAux;
     }
 
     @SuppressWarnings("unchecked")
@@ -81,23 +83,26 @@ public class EliminarArbitro extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (jTextField1.getText().equals("")) {
+       if (jTextField1.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Campo vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            jTextField1.setText("Nombre del árbitro...");
         } else {
             try{
-                Arbitro arbitroBuscado = Controlador.buscarArbitro(jTextField1.getText());
+                Arbitro arbitroBuscado = controladorAux.buscarArbitro(jTextField1.getText());
                 datos.removeAll();
                 datos.setLayout(new BorderLayout());
-                datos.add(new DatosEliminarArbitro(arbitroBuscado),BorderLayout.CENTER);
+                DatosEliminarArbitro dea = new DatosEliminarArbitro(arbitroBuscado, controladorAux);
+            dea.mostrar(arbitroBuscado);
+                datos.add(dea,BorderLayout.CENTER);
                 this.revalidate();
                 this.repaint();
-                DatosEliminarArbitro dea = new DatosEliminarArbitro(arbitroBuscado);
-                dea.mostrar(arbitroBuscado);
+                jTextField1.setText("");
             }catch (ArbitroNoEncontradoException e) {
+                jTextField1.setText("Nombre del árbitro...");
                 JOptionPane.showMessageDialog(this,e.getMessage(),"Árbitro no encontrado",JOptionPane.ERROR_MESSAGE);
             }
         }
-        
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -4,31 +4,43 @@ import Controller.Controlador;
 import Controller.Controlador.JugadorNoEncontradoException;
 import Model.Fecha;
 import Model.Jugador;
+import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 
 public class DatosEliminarJugador extends javax.swing.JPanel {
 
     
     private Jugador jugadorBuscado;
-    public DatosEliminarJugador(Jugador jugadorBuscado) {
+    private Controlador controladorAux = new Controlador();
+    public DatosEliminarJugador(Jugador jugadorBuscado,Controlador controladorAux) {
         this.jugadorBuscado = jugadorBuscado;
+        this.controladorAux=controladorAux;
         initComponents();
     }
 
     public void mostrar(Jugador jugadorBuscado){
-                String nombre = jugadorBuscado.getNombre();
-                String apellido = jugadorBuscado.getApellido();
-                Fecha f = jugadorBuscado.getFechaNac();
-                int dia = f.getDia();
-                int mes = f.getMes();
-                int anio = f.getAnio();
+                String nombre = controladorAux.getNombreJugadorBuscado(jugadorBuscado);
+                String apellido = controladorAux.getApellidoJugadorBuscado(jugadorBuscado);
+                int dia = controladorAux.getDiaNacimientoJugadorBuscado(jugadorBuscado);
+                int mes = controladorAux.getMesNacimientoJugadorBuscado(jugadorBuscado);
+                int anio = controladorAux.getAnioNacimientoJugadorBuscado(jugadorBuscado);
                 String fnac = dia+"/"+mes+"/"+anio;
-                String nacionalidad = jugadorBuscado.getNacionalidad();
-                String clubActual = jugadorBuscado.getClubActual();
-                int posicion = jugadorBuscado.getPosicion();
-                int goles = jugadorBuscado.getGoles();
-                int tarjetasAmarillas = jugadorBuscado.getTarjetasAmarillas();
-                int tarjetasRojas = jugadorBuscado.getTarjetasRojas();
+                String nacionalidad = controladorAux.getNacionalidadJugadorBuscado(jugadorBuscado);
+                String clubActual = controladorAux.getClubActualJugadorBuscado(jugadorBuscado);
+                String posicion = controladorAux.getPosicionJugadorBuscado(jugadorBuscado);
+                int goles = controladorAux.getGolesJugadorBuscado(jugadorBuscado);
+                int tarjetasAmarillas = controladorAux.getTarjetasAmarillasJugadorBuscado(jugadorBuscado);
+                int tarjetasRojas = controladorAux.getTarjetasRojasJugadorBuscado(jugadorBuscado);
+                
+                jLabel1.setText("Nombre: " + nombre);
+                jLabel2.setText("Apellido: " + apellido);
+                jLabel3.setText("Fecha de Nacimiento: " + fnac);
+                jLabel4.setText("Nacionalidad: " + nacionalidad);
+                jLabel5.setText("Club Actual: " + clubActual);
+                jLabel6.setText("Posicion: " + posicion);
+                jLabel7.setText("Goles: " + goles);
+                jLabel8.setText("Tarjetas Amarillas: " + tarjetasAmarillas);
+                jLabel9.setText("Tarjetas Rojas: " + tarjetasRojas);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -151,14 +163,16 @@ public class DatosEliminarJugador extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try{    
-               
-                Controlador.eliminarJugador(jugadorBuscado);
-                JOptionPane.showMessageDialog(this,"Jugador Eliminado exitosamente");
-            }catch (JugadorNoEncontradoException e) {
-                JOptionPane.showMessageDialog(this,e.getMessage(),"Jugador no encontrado",JOptionPane.ERROR_MESSAGE);
-            }
+            controladorAux.eliminarJugador(jugadorBuscado);
+            JOptionPane.showMessageDialog(this,"Jugador Eliminado exitosamente");
+            jPanel1.removeAll();
+            jPanel1.setLayout(new BorderLayout());
+            this.revalidate();
+            this.repaint();
+        }catch (JugadorNoEncontradoException e) {
+            JOptionPane.showMessageDialog(this,e.getMessage(),"Jugador no encontrado",JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;

@@ -1,0 +1,3 @@
+Lionel Andrés,Messi Cuccittini,argentina,24,6,1987,Inter Maiami,44,4,78,03
+Pierluigi,Collina,italiano,13,2,1960,true,34 
+Miguel Ángel,Borja Hernández,Colombiano,26,1,1993,River Plate,56,4,45,9

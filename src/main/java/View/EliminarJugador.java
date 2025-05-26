@@ -8,8 +8,10 @@ import javax.swing.JOptionPane;
 
 public class EliminarJugador extends javax.swing.JPanel {
 
-    public EliminarJugador() {
+    private Controlador controladorAux=new Controlador();
+    public EliminarJugador(Controlador controladorAux) {
         initComponents();
+        this.controladorAux=controladorAux;
     }
 
     @SuppressWarnings("unchecked")
@@ -92,17 +94,20 @@ public class EliminarJugador extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (jTextField1.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Campo vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            jTextField1.setText("Nombre del jugador...");
         } else {
             try{
-                Jugador jugadorBuscado = Controlador.buscarJugador(jTextField1.getText());
+                Jugador jugadorBuscado = controladorAux.buscarJugador(jTextField1.getText());
                 datos.removeAll();
                 datos.setLayout(new BorderLayout());
-                datos.add(new DatosEliminarJugador(jugadorBuscado),BorderLayout.CENTER);
+                 DatosEliminarJugador dej = new DatosEliminarJugador(jugadorBuscado, controladorAux);
+                dej.mostrar(jugadorBuscado);
+                datos.add(dej,BorderLayout.CENTER);
                 this.revalidate();
                 this.repaint();
-                DatosEliminarJugador dej = new DatosEliminarJugador(jugadorBuscado);
-                dej.mostrar(jugadorBuscado);
+                jTextField1.setText("");
             }catch (JugadorNoEncontradoException e) {
+                jTextField1.setText("Nombre del jugador...");
                 JOptionPane.showMessageDialog(this,e.getMessage(),"Jugador no encontrado",JOptionPane.ERROR_MESSAGE);
             }
         }
