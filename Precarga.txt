@@ -1,3 +1,8 @@
-Lionel Andrés,Messi Cuccittini,argentina,24,6,1987,Inter Maiami,44,4,78,03
-Pierluigi,Collina,italiano,13,2,1960,true,34 
-Miguel Ángel,Borja Hernández,Colombiano,26,1,1993,River Plate,56,4,45,9
+Pierluigi,Collina,italiano,13,2,1960,false,9034
+Miguel Ángel,Borja Hernández,Colombiano,26,1,1993,River Plate,0,2,0,9
+Néstor,Pitana,Argentina,17,6,1975,false,15
+Franco,Armani,Argentina,16,10,1986,River Plate,430,4,86,0
+Franco,Mastantuono,Argentina,14,8,2007,River Plate,7,3,0,0
+Facundo,Colidio,Argentina,4,1,200,River Plate,10,4,0,0
+Paulo,Díaz,Chilena,25,8,1994,River Plate,2,2,3,0
+Nacho,Vidal,Chad,8,1,1962,Barracas Central,69,2,6,9

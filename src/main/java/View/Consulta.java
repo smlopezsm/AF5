@@ -1,13 +1,17 @@
 package View;
 
 import java.awt.BorderLayout;
-
+import Model.Persona;
+import Controller.Controlador;
 public class Consulta extends javax.swing.JPanel {
-
+   private Controlador ControladorLista = new Controlador();
     public Consulta() {
         initComponents();
     }
-
+      public Consulta(Controlador ControladorLista) {
+        initComponents();
+        this.ControladorLista=ControladorLista;
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -129,7 +133,7 @@ public class Consulta extends javax.swing.JPanel {
     private void arbitrosInternacionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arbitrosInternacionalActionPerformed
         consultaEspecifica.removeAll();
         consultaEspecifica.setLayout( new BorderLayout());
-        consultaEspecifica.add(new ConsultaArbitroInternacional(),BorderLayout.CENTER);
+        consultaEspecifica.add(new ConsultaArbitroInternacional(ControladorLista),BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_arbitrosInternacionalActionPerformed
@@ -137,7 +141,7 @@ public class Consulta extends javax.swing.JPanel {
     private void CantJugadoresPorEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CantJugadoresPorEquipoActionPerformed
         consultaEspecifica.removeAll();
         consultaEspecifica.setLayout( new BorderLayout());
-        consultaEspecifica.add(new ConsultaJuagadoresPorEquipo(),BorderLayout.CENTER);
+        consultaEspecifica.add(new ConsultaJugadoresPorEquipo(ControladorLista),BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_CantJugadoresPorEquipoActionPerformed
@@ -145,7 +149,7 @@ public class Consulta extends javax.swing.JPanel {
     private void jugadoresPorGolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugadoresPorGolesActionPerformed
         consultaEspecifica.removeAll();
         consultaEspecifica.setLayout( new BorderLayout()); 
-        consultaEspecifica.add(new ConsultaJugadoresCantGoles(),BorderLayout.CENTER);
+        consultaEspecifica.add(new ConsultaJugadoresCantGoles(ControladorLista),BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_jugadoresPorGolesActionPerformed
@@ -153,7 +157,7 @@ public class Consulta extends javax.swing.JPanel {
     private void jugadoresMaxExpulsionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugadoresMaxExpulsionActionPerformed
         consultaEspecifica.removeAll();
         consultaEspecifica.setLayout( new BorderLayout()); 
-        consultaEspecifica.add(new ConsultaJugadorMasExpulsiones(),BorderLayout.CENTER);
+        consultaEspecifica.add(new ConsultaJugadorMasExpulsiones(ControladorLista),BorderLayout.CENTER);
         this.revalidate();
         this.repaint(); 
         
@@ -162,7 +166,7 @@ public class Consulta extends javax.swing.JPanel {
     private void jugadoresPorPosicion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugadoresPorPosicion1ActionPerformed
         consultaEspecifica.removeAll();
         consultaEspecifica.setLayout( new BorderLayout()); 
-        consultaEspecifica.add(new  ConsultaJugadoresPorPosicion(),BorderLayout.CENTER);
+        consultaEspecifica.add(new  ConsultaJugadoresPorPosicion(ControladorLista),BorderLayout.CENTER);
         this.revalidate();
         this.repaint(); 
     }//GEN-LAST:event_jugadoresPorPosicion1ActionPerformed

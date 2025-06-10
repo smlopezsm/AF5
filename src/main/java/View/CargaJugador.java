@@ -1,7 +1,13 @@
 package View;
 
 import Controller.Controlador;
+import Model.Jugador;
+import Model.Persona;
 import java.awt.HeadlessException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -11,11 +17,59 @@ import javax.swing.JTextField;
 
 public class CargaJugador extends javax.swing.JPanel {
 
-    public CargaJugador() {
+    private Controlador ControladorLista = new Controlador();
+    List<Persona>lista=new ArrayList<>();
+    public CargaJugador(Controlador ControladorList) {
         initComponents();
+        this.ControladorLista = ControladorList;
+        minimoJuadores(ControladorLista.getListaPersonas());
     }
-    private Controlador controlador;
-
+    
+    private int comprobar(List<Persona> listado,String equipoBuscar){
+    int cant=0;
+        if (listado.size() == 0) {
+           JOptionPane.showMessageDialog(null, "No se encontraron personas/árbitros cargados previamente");
+        }else{
+        for(Persona indice: listado){
+          if(indice instanceof Jugador){
+                Controlador controlListaAux= new Controlador();
+               controlListaAux.setJugador((Jugador)indice);
+               String equipoActual=controlListaAux.getClubActualJugador();
+               if(equipoActual.equals(equipoBuscar)){
+                 cant++;
+               }
+            }
+         }
+        
+        } 
+        return cant;
+    }
+    
+    private void minimoJuadores(List<Persona> listado){
+    boolean cumpleMinimo=true;
+    String equipo="";
+    for(int i=1;i<equipoBox.getItemCount();i++){
+    if( comprobar(listado, equipoBox.getItemAt(i))<5){
+    cumpleMinimo=false;
+    equipo=equipo+","+equipoBox.getItemAt(i);
+    }
+    
+    }
+    if(!cumpleMinimo){
+     JOptionPane.showMessageDialog(null,"hay equipos con menos de 5 jugadores, los cuales son:"+equipo+" por favor carge la cantida de equipos correcta");
+    }
+    }
+    
+    private boolean excedeMaximoJugadores(List<Persona> listado,String equipo){
+     int cant=comprobar(listado,equipo);
+     if(cant==7){
+     return true;
+     }else{
+     return false;
+     }
+    }
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -29,7 +83,6 @@ public class CargaJugador extends javax.swing.JPanel {
         AnioBox = new javax.swing.JComboBox<>();
         mesBox = new javax.swing.JComboBox<>();
         txtNacionalidadJugador = new javax.swing.JLabel();
-        nacionalidadTxt = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         equipoBox = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
@@ -43,6 +96,7 @@ public class CargaJugador extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         BtnAgregar = new javax.swing.JButton();
         Limpiarbtn = new javax.swing.JButton();
+        nacionalidadBox = new javax.swing.JComboBox<>();
 
         jLabel1.setText("Nombre:");
 
@@ -79,12 +133,6 @@ public class CargaJugador extends javax.swing.JPanel {
         mesBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mes", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
 
         txtNacionalidadJugador.setText("Nacionalidad:");
-
-        nacionalidadTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nacionalidadTxtActionPerformed(evt);
-            }
-        });
 
         jLabel5.setText("Club Actual:");
 
@@ -129,6 +177,8 @@ public class CargaJugador extends javax.swing.JPanel {
             }
         });
 
+        nacionalidadBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Afganistán", "Albania", "Alemania", "Andorra", "Angola", "Antigua y Barbuda", "Arabia Saudita", "Argelia", "Argentina", "Armenia", "Australia", "Austria", "Azerbaiyán", "Bahamas", "Bangladés", "Barbados", "Baréin", "Bélgica", "Belice", "Benín", "Bielorrusia", "Birmania (Myanmar)", "Bolivia", "Bosnia y Herzegovina", "Botsuana", "Brasil", "Brunéi", "Bulgaria", "Burkina Faso", "Burundi", "Bután", "Cabo Verde", "Camboya", "Camerún", "Canadá", "Catar", "Chad", "Chile", "China", "Chipre", "Colombia", "Comoras", "Corea del Norte", "Corea del Sur", "Costa de Marfil", "Costa Rica", "Croacia", "Cuba", "Dinamarca", "Dominica", "Ecuador", "Egipto", "El Salvador", "Emiratos Árabes Unidos", "Eritrea", "Eslovaquia", "Eslovenia", "España", "Estados Unidos", "Estonia", "Esuatini", "Etiopía", "Filipinas", "Finlandia", "Fiyi", "Francia", "Gabón", "Gambia", "Georgia", "Ghana", "Granada", "Grecia", "Guatemala", "Guinea", "Guinea-Bisáu", "Guinea Ecuatorial", "Guyana", "Haití", "Honduras", "Hungría", "India", "Indonesia", "Irak", "Irán", "Irlanda", "Islandia", "Islas Marshall", "Islas Salomón", "Israel", "Italia", "Jamaica", "Japón", "Jordania", "Kazajistán", "Kenia", "Kirguistán", "Kiribati", "Kuwait", "Laos", "Lesoto", "Letonia", "Líbano", "Liberia", "Libia", "Liechtenstein", "Lituania", "Luxemburgo", "Madagascar", "Malasia", "Malaui", "Maldivas", "Malí", "Malta", "Marruecos", "Mauricio", "Mauritania", "México", "Micronesia", "Moldavia", "Mónaco", "Mongolia", "Montenegro", "Mozambique", "Namibia", "Nauru", "Nepal", "Nicaragua", "Níger", "Nigeria", "Noruega", "Nueva Zelanda", "Omán", "Países Bajos", "Pakistán", "Palaos", "Panamá", "Papúa Nueva Guinea", "Paraguay", "Perú", "Polonia", "Portugal", "Reino Unido", "República Centroafricana", "República Checa", "República del Congo", "República Democrática del Congo", "República Dominicana", "Ruanda", "Rumanía", "Rusia", "San Cristóbal y Nieves", "San Marino", "San Vicente y las Granadinas", "Santa Lucía", "Santo Tomé y Príncipe", "Senegal", "Serbia", "Seychelles", "Sierra Leona", "Singapur", "Siria", "Somalia", "Sri Lanka", "Sudáfrica", "Sudán", "Sudán del Sur", "Suecia", "Suiza", "Surinam", "Tailandia", "Tanzania", "Tayikistán", "Timor Oriental", "Togo", "Tonga", "Trinidad y Tobago", "Túnez", "Turkmenistán", "Turquía", "Tuvalu", "Ucrania", "Uganda", "Uruguay", "Uzbekistán", "Vanuatu", "Vaticano", "Venezuela", "Vietnam", "Yemen", "Yibuti", "Zambia", "Zimbabue" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -157,7 +207,7 @@ public class CargaJugador extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtNacionalidadJugador)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nacionalidadTxt)
+                                .addComponent(nacionalidadBox, 0, 1, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel5))
                             .addGroup(layout.createSequentialGroup()
@@ -212,10 +262,10 @@ public class CargaJugador extends javax.swing.JPanel {
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nacionalidadTxt)
                     .addComponent(equipoBox)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNacionalidadJugador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtNacionalidadJugador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nacionalidadBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -254,6 +304,7 @@ public class CargaJugador extends javax.swing.JPanel {
     private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
 
         try {
+            
             String nombreJgdor = txtNombrejugador.getText();
             if (nombreJgdor.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "¡Ingrese Nombre!");
@@ -264,7 +315,7 @@ public class CargaJugador extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "¡Ingrese Apellido!");
                 return;
             }
-            String nacioJgdor = txtNacionalidadJugador.getText();
+            String nacioJgdor = nacionalidadBox.getSelectedItem().toString().trim();
             if (nacioJgdor.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "¡Ingrese Nacionalidad!");
                 return;
@@ -272,7 +323,7 @@ public class CargaJugador extends javax.swing.JPanel {
 
             int diaNac = (int) diaBox.getSelectedIndex();
             int mesNac = (int) mesBox.getSelectedIndex();
-            int anioNac = (int) AnioBox.getSelectedIndex();
+            int anioNac = Integer.parseInt(AnioBox.getSelectedItem().toString().trim());
 
             if (diaNac == 0 || mesNac == 0 || anioNac == 0) {
                 JOptionPane.showMessageDialog(this, "¡Ingrese una Fecha de Nacimiento Valida!");
@@ -280,14 +331,14 @@ public class CargaJugador extends javax.swing.JPanel {
             }
 
             String equipo = equipoBox.getSelectedItem().toString();
-            if(equipoBox.getSelectedItem().equals("-")){
-                JOptionPane.showMessageDialog(this,"Seleccione un Equipo");
+            if (equipoBox.getSelectedItem().equals("-")) {
+                JOptionPane.showMessageDialog(this, "Seleccione un Equipo");
                 return;
             }
 
             int posicion = (int) PosicionJugadorBox.getSelectedIndex();
 
-            if (PosicionJugadorBox.getSelectedIndex()==0) {
+            if (PosicionJugadorBox.getSelectedIndex() == 0) {
                 JOptionPane.showMessageDialog(this, "Seleccione una posicion Valida");
                 return;
             }
@@ -312,27 +363,48 @@ public class CargaJugador extends javax.swing.JPanel {
 
             Controlador controladorAux = new Controlador();
 
-            controladorAux.setNombrePersona(nombreJgdor);
-            controladorAux.setApellidoPersona(apeJgdor);
-            controladorAux.setNacionalidadPersona(nacioJgdor);
-            controladorAux.setFechaNacimientoPersona(diaNac, mesNac, anioNac);
+            controladorAux.setNombreJugador(nombreJgdor);
+            controladorAux.setApellidoJugador(apeJgdor);
+            controladorAux.setNacionalidadJugador(nacioJgdor);
+            controladorAux.setFechaNacimientoJugador(diaNac, mesNac, anioNac);
             controladorAux.setClubActualJugador(equipo);
             controladorAux.setPosicionJugador(posicion);
             controladorAux.setGolesJugador(cantgoles);
             controladorAux.setTarjetasRojasJugador(tarjR);
             controladorAux.setTarjetasAmarillasJugador(tarjA);
+            
+            if(excedeMaximoJugadores(ControladorLista.getListaPersonas(),controladorAux.getClubActualJugador())){
+            JOptionPane.showMessageDialog(null, "El euipo ya cuenta con 7 jugadores no de puede agregar otro mas.");
+            
+            }else{
+            if (ControladorLista.jugadorYaCargado(controladorAux.getNombreJugador(),controladorAux.getApellidoJugador()) == true) {
+                JOptionPane.showMessageDialog(null, "Este Jugador Ya Esta Cargado", "Error", JOptionPane.ERROR_MESSAGE);
+                limpiarPantalla();
+            } else {
+                ControladorLista.AgregarJugadorALaLista(controladorAux.getJugador());
+                limpiarPantalla();
+                JOptionPane.showMessageDialog(this, "Jugador Cargado Correctamente");
 
-            controladorAux.AgregarJugadorALaLista(controladorAux.getJugador());
-            JOptionPane.showMessageDialog(this, "Jugador Cargado Correctamente");
+            }
+
+            
+            }
+            
+
+            
+
         } catch (ClassCastException e) {
             JOptionPane.showMessageDialog(this, "Error de conversión de datos: " + e.getMessage());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Formato numérico inválido: " + e.getMessage());
         } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(this, "Algunos campos no fueron seleccionados correctamente.");
+            JOptionPane.showMessageDialog(this, "Algunos campos no fueron seleccionados correctamente." + e.getMessage());
         } catch (HeadlessException e) {
             JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage());
+
         }
+       
+
     }//GEN-LAST:event_BtnAgregarActionPerformed
 
     private void equipoBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equipoBoxActionPerformed
@@ -343,22 +415,8 @@ public class CargaJugador extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombrejugadorActionPerformed
 
-    private void nacionalidadTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nacionalidadTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nacionalidadTxtActionPerformed
-
     private void LimpiarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarbtnActionPerformed
-        txtNombrejugador.setText("");
-        txtApellidoJugador.setText("");
-        nacionalidadTxt.setText("");
-        diaBox.setSelectedIndex(0);
-        mesBox.setSelectedIndex(0);
-        AnioBox.setSelectedIndex(0);
-        equipoBox.setSelectedIndex(0);
-        PosicionJugadorBox.setSelectedIndex(0);
-        CantGolesSpn.setValue(0);
-        TarjetasAmarillasJugadorSpn.setValue(0);
-        TarjetasRojasJugadorspn.setValue(0);
+       limpiarPantalla();
     }//GEN-LAST:event_LimpiarbtnActionPerformed
 
     public JComboBox<String> getAnioBox() {
@@ -401,8 +459,8 @@ public class CargaJugador extends javax.swing.JPanel {
         return mesBox;
     }
 
-    public JTextField getNacionalidadTxt() {
-        return nacionalidadTxt;
+    public JComboBox<String> getNacionalidadTxt() {
+        return nacionalidadBox;
     }
 
     public JTextField getTxtApellidoJugador() {
@@ -415,6 +473,19 @@ public class CargaJugador extends javax.swing.JPanel {
 
     public JTextField getTxtNombrejugador() {
         return txtNombrejugador;
+    }
+    public void limpiarPantalla(){
+        txtNombrejugador.setText("");
+        txtApellidoJugador.setText("");
+        nacionalidadBox.setSelectedIndex(0);
+        diaBox.setSelectedIndex(0);
+        mesBox.setSelectedIndex(0);
+        AnioBox.setSelectedIndex(0);
+        equipoBox.setSelectedIndex(0);
+        PosicionJugadorBox.setSelectedIndex(0);
+        CantGolesSpn.setValue(0);
+        TarjetasAmarillasJugadorSpn.setValue(0);
+        TarjetasRojasJugadorspn.setValue(0);
     }
 
 
@@ -438,7 +509,7 @@ public class CargaJugador extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JComboBox<String> mesBox;
-    private javax.swing.JTextField nacionalidadTxt;
+    private javax.swing.JComboBox<String> nacionalidadBox;
     private javax.swing.JTextField txtApellidoJugador;
     private javax.swing.JLabel txtNacionalidadJugador;
     private javax.swing.JTextField txtNombrejugador;

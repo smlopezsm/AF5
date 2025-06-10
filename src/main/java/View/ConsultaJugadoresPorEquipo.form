@@ -46,7 +46,7 @@
                   <Component id="fondoBoton" pref="0" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
               </Group>
-              <Component id="fondoLabel" alignment="0" max="32767" attributes="0"/>
+              <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -60,7 +60,7 @@
                   <EmptySpace type="separate" pref="77" max="32767" attributes="0"/>
                   <Component id="fondoBoton" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                  <Component id="fondoLabel" min="-2" pref="70" max="-2" attributes="0"/>
+                  <Component id="jPanel1" min="-2" pref="70" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -118,7 +118,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="fondoLabel">
+        <Container class="javax.swing.JPanel" name="jPanel1">
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
           <SubComponents>

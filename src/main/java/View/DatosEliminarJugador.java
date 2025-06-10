@@ -4,12 +4,14 @@ import Controller.Controlador;
 import Controller.Controlador.JugadorNoEncontradoException;
 import Model.Fecha;
 import Model.Jugador;
+import Model.Persona;
 import java.awt.BorderLayout;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class DatosEliminarJugador extends javax.swing.JPanel {
 
-    
+    private Controlador controladorLista = new Controlador();
     private Jugador jugadorBuscado;
     private Controlador controladorAux = new Controlador();
     public DatosEliminarJugador(Jugador jugadorBuscado,Controlador controladorAux) {
@@ -18,6 +20,35 @@ public class DatosEliminarJugador extends javax.swing.JPanel {
         initComponents();
     }
 
+    private int comprobar(List<Persona> listado,String equipoBuscar){
+    int cant=0;
+        if (listado.size() == 0) {
+           JOptionPane.showMessageDialog(null, "No se encontraron personas/árbitros cargados previamente");
+        }else{
+        for(Persona indice: listado){
+          if(indice instanceof Jugador){
+                Controlador controlListaAux= new Controlador();
+               controlListaAux.setJugador((Jugador)indice);
+               String equipoActual=controlListaAux.getClubActualJugador();
+               if(equipoActual.equals(equipoBuscar)){
+                 cant++;
+               }
+            }
+         }
+        
+        } 
+        return cant;
+    }
+    
+    private boolean cantMinDeJugadores(List<Persona> listado,String equipo){
+     int cant=comprobar(listado,equipo);
+     if(cant==5){
+     return true;
+     }else{
+     return false;
+     }
+    }
+    
     public void mostrar(Jugador jugadorBuscado){
                 String nombre = controladorAux.getNombreJugadorBuscado(jugadorBuscado);
                 String apellido = controladorAux.getApellidoJugadorBuscado(jugadorBuscado);
@@ -162,13 +193,18 @@ public class DatosEliminarJugador extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try{    
+        try{
+            System.out.println("DEVUELVE: "+cantMinDeJugadores(controladorAux.getListaPersonas(),controladorAux.getClubActualJugadorBuscado(jugadorBuscado)));
+            if(cantMinDeJugadores(controladorAux.getListaPersonas(),controladorAux.getClubActualJugadorBuscado(jugadorBuscado))){
+               JOptionPane.showMessageDialog(null,"El equipo cuenta con 5 jugadores y por tanto no puede eliminar otro.","Error", JOptionPane.ERROR_MESSAGE);
+            }else{
             controladorAux.eliminarJugador(jugadorBuscado);
             JOptionPane.showMessageDialog(this,"Jugador Eliminado exitosamente");
             jPanel1.removeAll();
             jPanel1.setLayout(new BorderLayout());
             this.revalidate();
             this.repaint();
+            }
         }catch (JugadorNoEncontradoException e) {
             JOptionPane.showMessageDialog(this,e.getMessage(),"Jugador no encontrado",JOptionPane.ERROR_MESSAGE);
         }

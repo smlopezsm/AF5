@@ -1,39 +1,69 @@
 package View;
 
+import Controller.Controlador;
+import Model.Persona;
+import Model.Jugador;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ConsultaJugadoresCantGoles extends javax.swing.JPanel {
-
-    public ConsultaJugadoresCantGoles() {
+    private Controlador ControladorLista= new Controlador();
+    public ConsultaJugadoresCantGoles(Controlador ControladorLista) {
         initComponents();
+        this.ControladorLista=ControladorLista;
     }
-    private void cargartabla(){
-    DefaultTableModel model = new DefaultTableModel();
-     
-     model.addColumn("nombre");
-     model.addColumn("equipo");
-     model.addColumn("posision");
-     model.addColumn("Cant Goles");
-
-     
-    
-      model.addRow(new Object[]{
-      "Messi",
-      "inter",
-      "delantero",
-      "44"
-      });
-     
-     
-     
-     
-     
-      tabla.setModel(model);
+    private void CargarTabla(List<Persona> lista){
+        boolean jugadorEncontrado=false;
+        if(lista.size()==0){
+            JOptionPane.showMessageDialog(null, "No se encontraron personas/árbitros cargados previamente");
+        }else{
+             DefaultTableModel model = new DefaultTableModel() {
+             @Override
+             public boolean isCellEditable(int row, int column) {
+                  return false; // Hace que ninguna celda sea editable
+              }
+         };
+         model.addColumn("Nombre");
+         model.addColumn("Apellido");
+         model.addColumn("Nacinalidad");
+         model.addColumn("Fecha de Nacimiento");
+         model.addColumn("Equipo");
+         model.addColumn("Cant goles");
+         model.addColumn("Posición");
+         model.addColumn("Tarjetas amarillas");
+         model.addColumn("Tarjetas Rojas");
+         
+         for(Persona indice:lista){
+              if(indice instanceof Jugador){
+                 Controlador controladorAux= new Controlador();
+                 controladorAux.setJugador((Jugador)indice);
+                 if(controladorAux.getGolesJugador()> (int)cantGoles.getValue()){
+                  model.addRow(new Object[]{
+                  controladorAux.getNombreJugador(),
+                  controladorAux.getApellidoJugador(),
+                  controladorAux.getNacionalidadJugador(),
+                  controladorAux.getFechaNacimientoJugador(),
+                  controladorAux.getClubActualJugador(),
+                  controladorAux.getGolesJugador(),
+                  controladorAux.getPosicionJugador(),
+                  controladorAux.getTarjetasAmarillasJugador(),
+                  controladorAux.getTarjetasRojasJugador()
+                 });
+                 jugadorEncontrado=true; 
+             }
+          }
+         }
         
-        // Crear el JScrollPane que contendrá la tabla
-        panelTabla.setViewportView(tabla);
-      panelTabla.setVisible(true);
-
+         
+        if(!jugadorEncontrado){
+          JOptionPane.showMessageDialog(null,"No se encontraron jugadores que superen la cantidad de :"+ (int)cantGoles.getValue()+" goles.");
+        }else{
+         tabla.setModel(model);
+       panelTabla.setViewportView(tabla);
+       panelTabla.setVisible(true);
+        }
+       }
     }
     
     @SuppressWarnings("unchecked")
@@ -57,14 +87,14 @@ public class ConsultaJugadoresCantGoles extends javax.swing.JPanel {
 
             },
             new String [] {
-                "nombre", "equipo", "posición", "Cant goles"
+                "Datos"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -146,7 +176,7 @@ public class ConsultaJugadoresCantGoles extends javax.swing.JPanel {
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         // TODO add your handling code here:
-        cargartabla();
+        CargarTabla(ControladorLista.getListaPersonas());
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_botonBuscarActionPerformed

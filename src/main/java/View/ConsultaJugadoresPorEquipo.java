@@ -4,12 +4,12 @@ import Model.Jugador;
 import Model.Persona;
 import java.util.List;
 import javax.swing.JOptionPane;
-public class ConsultaJuagadoresPorEquipo extends javax.swing.JPanel {
+public class ConsultaJugadoresPorEquipo extends javax.swing.JPanel {
     private Controlador controlLista= new Controlador();
-    public ConsultaJuagadoresPorEquipo() {
+    public ConsultaJugadoresPorEquipo() {
         initComponents();
     }
-    public ConsultaJuagadoresPorEquipo(Controlador controlLista) {
+    public ConsultaJugadoresPorEquipo(Controlador controlLista) {
         initComponents();
         this.controlLista= controlLista;
         labelResultado.setVisible(false);
@@ -24,7 +24,7 @@ public class ConsultaJuagadoresPorEquipo extends javax.swing.JPanel {
         equipos = new javax.swing.JComboBox<>();
         fondoBoton = new javax.swing.JPanel();
         botonBuscar = new javax.swing.JButton();
-        fondoLabel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         labelResultado = new javax.swing.JLabel();
 
         labelEquipo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -54,11 +54,11 @@ public class ConsultaJuagadoresPorEquipo extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
         fondoBoton.add(botonBuscar, gridBagConstraints);
 
-        fondoLabel.setLayout(new java.awt.GridBagLayout());
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         labelResultado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelResultado.setText("Resultado");
-        fondoLabel.add(labelResultado, new java.awt.GridBagConstraints());
+        jPanel1.add(labelResultado, new java.awt.GridBagConstraints());
 
         javax.swing.GroupLayout fondoLayout = new javax.swing.GroupLayout(fondo);
         fondo.setLayout(fondoLayout);
@@ -74,7 +74,7 @@ public class ConsultaJuagadoresPorEquipo extends javax.swing.JPanel {
                 .addGap(191, 191, 191)
                 .addComponent(fondoBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addGap(195, 195, 195))
-            .addComponent(fondoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         fondoLayout.setVerticalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,7 +86,7 @@ public class ConsultaJuagadoresPorEquipo extends javax.swing.JPanel {
                 .addGap(18, 77, Short.MAX_VALUE)
                 .addComponent(fondoBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(49, 49, 49)
-                .addComponent(fondoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64))
         );
 
@@ -104,7 +104,7 @@ public class ConsultaJuagadoresPorEquipo extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     
-    private void cantJugadoresEuipos(List<Persona> listado){
+    private void cantJugadoresEquipos(List<Persona> listado){
         int cant=0;
          String equipoBuscar=equipos.getSelectedItem().toString();
         if (listado.size() == 0) {
@@ -121,10 +121,10 @@ public class ConsultaJuagadoresPorEquipo extends javax.swing.JPanel {
             }
          }
          if(cant>0){      
-              labelResultado.setText("la cantidad de jugadores de:"+equipoBuscar+"es de:"+cant+".");
+              labelResultado.setText(equipoBuscar+" Tiene "+cant+ "Jugadores Cargados.");
               labelResultado.setVisible(true);  
          }else{
-               labelResultado.setText("No existen Jugadores en el equipo:"+equipoBuscar+".");
+               labelResultado.setText(equipoBuscar+" No tiene Jugadores Cargados.");
                labelResultado.setVisible(true);  
          }
         }
@@ -138,7 +138,7 @@ public class ConsultaJuagadoresPorEquipo extends javax.swing.JPanel {
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         // TODO add your handling code here:
-        cantJugadoresEuipos(controlLista.getListaPersonas());
+        cantJugadoresEquipos(controlLista.getListaPersonas());
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_botonBuscarActionPerformed
@@ -149,7 +149,7 @@ public class ConsultaJuagadoresPorEquipo extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> equipos;
     private javax.swing.JPanel fondo;
     private javax.swing.JPanel fondoBoton;
-    private javax.swing.JPanel fondoLabel;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelEquipo;
     private javax.swing.JLabel labelResultado;
     // End of variables declaration//GEN-END:variables

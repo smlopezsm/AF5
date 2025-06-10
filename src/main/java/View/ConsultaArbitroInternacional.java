@@ -1,38 +1,82 @@
 package View;
-
+import Controller.Controlador;
 import javax.swing.table.DefaultTableModel;
+import Model.*;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 public class ConsultaArbitroInternacional extends javax.swing.JPanel {
-
+    
+    private Controlador ControladorLista= new Controlador();
+    
     public ConsultaArbitroInternacional() {
         initComponents();
        // panelTabla.setVisible(false);
     }
-     public void cargartabla(){
-     DefaultTableModel model = new DefaultTableModel();
-     
-     model.addColumn("nombre");
-     model.addColumn("Nacionalidad");
-     model.addColumn("Internacional");
-
-     
     
-      model.addRow(new Object[]{
-      "Pierluigi Collina",
-      "italiano",
-      true
-      });
+     public ConsultaArbitroInternacional( Controlador controladorLista) {
+        initComponents();
+        this.ControladorLista=controladorLista;
+       // panelTabla.setVisible(false);
+    }
+    
+     private void CargarTabla(List<Persona>  lista ){
+       //muestra un mensje si la lista esta vacia, si no procede a realizar la consulta 
+         if (lista.size() == 0) {
+           JOptionPane.showMessageDialog(null, "No se encontraron personas/árbitros cargados previamente");
+        }else{
+           boolean encontrar= false;
+           DefaultTableModel model = new DefaultTableModel() {
+           @Override
+           public boolean isCellEditable(int row, int column) {
+                return false; // Hace que ninguna celda sea editable
+           }
+        };
      
+        model.addColumn("Nombre");
+        model.addColumn("Apellido");
+        model.addColumn("Nacinalidad");
+        model.addColumn("Fecha de Nacimiento");
+        model.addColumn("Internacional");
+        model.addColumn("Tarjetas sacadas");
+      
+        Controlador cantroladorAux= new   Controlador();
+      
+        for(Persona indice: lista ){
+          
+           if(indice instanceof  Arbitro){
+             cantroladorAux.setArbitro((Arbitro) indice);
+                if(cantroladorAux.getArbitroInternacional().equals("Si") ){
+                 encontrar= true;
+                 model.addRow(new Object[]{
+                 cantroladorAux.getNombreArbitro(),
+                 cantroladorAux.getApellidoArbitro(),
+                 cantroladorAux.getNacionalidadArbitro(),
+                 cantroladorAux.getFechaNacimientoArbitro(),
+                 cantroladorAux.getArbitroInternacional(),
+                 cantroladorAux.getTarjetasSacadasArbitro(),
+         
+              });
+              }
+            
+          }
+         
+      }
      
-     
-     
-     
-      tabla.setModel(model);
+      //mensaje si no encontro aebitro que cumpla la candicion, si la encontro crea la tabla
+     if(encontrar== false ){
+          JOptionPane.showMessageDialog(null, "No se encontraron personas/árbitros que cumplan con los requerimientos");
+          }else{
+          tabla.setModel(model);
         
         // Crear el JScrollPane que contendrá la tabla
         panelTabla.setViewportView(tabla);
-      panelTabla.setVisible(true);
-
+        panelTabla.setVisible(true);     
+            }
+        
+        
+        }
+         
     }
 
     @SuppressWarnings("unchecked")
@@ -55,19 +99,12 @@ public class ConsultaArbitroInternacional extends javax.swing.JPanel {
 
             },
             new String [] {
-                "nombre", "Nacionalidad", "Internacional"
+                "Datos"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -76,8 +113,6 @@ public class ConsultaArbitroInternacional extends javax.swing.JPanel {
         panelTabla.setViewportView(tabla);
         if (tabla.getColumnModel().getColumnCount() > 0) {
             tabla.getColumnModel().getColumn(0).setResizable(false);
-            tabla.getColumnModel().getColumn(1).setResizable(false);
-            tabla.getColumnModel().getColumn(2).setResizable(false);
         }
 
         fondoBoton.setLayout(new java.awt.GridBagLayout());
@@ -141,7 +176,7 @@ public class ConsultaArbitroInternacional extends javax.swing.JPanel {
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         // TODO add your handling code here:
-        cargartabla();
+        CargarTabla(ControladorLista.getListaPersonas());
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_botonBuscarActionPerformed

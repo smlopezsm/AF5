@@ -1,11 +1,14 @@
 package View;
 
+import Controller.Controlador;
 import java.awt.BorderLayout;
 
 public class Cargar extends javax.swing.JPanel {
 
-    public Cargar() {
+    private Controlador controladoraLista= new Controlador();
+    public Cargar(Controlador controladoraLista) {
         initComponents();
+        this.controladoraLista=controladoraLista;
     }
 
     @SuppressWarnings("unchecked")
@@ -94,7 +97,7 @@ public class Cargar extends javax.swing.JPanel {
     private void JugadorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JugadorBtnActionPerformed
         PanelCarga.removeAll();
         PanelCarga.setLayout(new BorderLayout());
-        PanelCarga.add(new CargaJugador(),BorderLayout.CENTER);
+        PanelCarga.add(new CargaJugador(controladoraLista),BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_JugadorBtnActionPerformed
@@ -102,7 +105,7 @@ public class Cargar extends javax.swing.JPanel {
     private void ArbitroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArbitroBtnActionPerformed
         PanelCarga.removeAll();
         PanelCarga.setLayout(new BorderLayout());
-        PanelCarga.add(new CargaArbitro(),BorderLayout.CENTER);
+        PanelCarga.add(new CargaArbitro(controladoraLista),BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_ArbitroBtnActionPerformed

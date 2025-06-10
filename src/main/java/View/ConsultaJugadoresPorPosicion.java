@@ -1,39 +1,68 @@
 package View;
-
+import Model.Jugador;
+import Model.Persona;
+import Controller.Controlador;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ConsultaJugadoresPorPosicion extends javax.swing.JPanel {
-
-    public ConsultaJugadoresPorPosicion() {
+   private Controlador controladorLista= new Controlador();
+    public ConsultaJugadoresPorPosicion(Controlador controladorLista) {
         initComponents();
+        this.controladorLista=  controladorLista;
     }
-    private void cargartabla(){
-    DefaultTableModel model = new DefaultTableModel();
-     
-     model.addColumn("nombre");
-     model.addColumn("equipo");
-     model.addColumn("posision");
-      model.addColumn("Cant Goles");
-
-     
-    
-      model.addRow(new Object[]{
-      "Messi",
-      "inter",
-      "delantero",
-      "44"
-      });
-     
-     
-     
-     
-     
-      tabla.setModel(model);
+    private void CargarTabla(List<Persona> lista){
+           boolean jugadorEncontrado=false;
+        if(lista.size()==0){
+            JOptionPane.showMessageDialog(null, "No se encontraron personas/árbitros cargados previamente");
+        }else{
+             DefaultTableModel model = new DefaultTableModel() {
+             @Override
+             public boolean isCellEditable(int row, int column) {
+                  return false; // Hace que ninguna celda sea editable
+              }
+         };
+         model.addColumn("Nombre");
+         model.addColumn("Apellido");
+         model.addColumn("Nacinalidad");
+         model.addColumn("Fecha de Nacimiento");
+         model.addColumn("Equipo");
+         model.addColumn("Cant goles");
+         model.addColumn("Posición");
+         model.addColumn("Tarjetas amarillas");
+         model.addColumn("Tarjetas Rojas");
+         
+         for(Persona indice:lista){
+              if(indice instanceof Jugador){
+                 Controlador controladorAux= new Controlador();
+                 controladorAux.setJugador((Jugador)indice);
+                 if(controladorAux.getPosicionJugador().equals(posiciones.getSelectedItem())){
+                  model.addRow(new Object[]{
+                  controladorAux.getNombreJugador(),
+                  controladorAux.getApellidoJugador(),
+                  controladorAux.getNacionalidadJugador(),
+                  controladorAux.getFechaNacimientoJugador(),
+                  controladorAux.getClubActualJugador(),
+                  controladorAux.getGolesJugador(),
+                  controladorAux.getPosicionJugador(),
+                  controladorAux.getTarjetasAmarillasJugador(),
+                  controladorAux.getTarjetasRojasJugador()
+                 });
+                 jugadorEncontrado=true; 
+             }
+          }
+         }
         
-        // Crear el JScrollPane que contendrá la tabla
-        panelTabla.setViewportView(tabla);
-      panelTabla.setVisible(true);
-
+         
+        if(!jugadorEncontrado){
+          JOptionPane.showMessageDialog(null,"No se encontraron jugadores que superen la cantidad de :"+" goles.");
+        }else{
+         tabla.setModel(model);
+       panelTabla.setViewportView(tabla);
+       panelTabla.setVisible(true);
+        }
+       }
     }
     
     @SuppressWarnings("unchecked")
@@ -160,7 +189,7 @@ public class ConsultaJugadoresPorPosicion extends javax.swing.JPanel {
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         // TODO add your handling code here:
-        cargartabla();
+        CargarTabla(controladorLista.getListaPersonas());
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_botonBuscarActionPerformed

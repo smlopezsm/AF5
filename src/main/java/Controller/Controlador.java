@@ -4,8 +4,11 @@ import Model.Arbitro;
 import Model.Fecha;
 import Model.Jugador;
 import Model.Persona;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,12 +22,15 @@ public class Controlador {
      
      public Controlador(){
          this.listado = new ArrayList<>();
+         this.p=new Persona();
+         this.j=new Jugador();
+         this.a=new Arbitro();
      }
      
      public Controlador(List<Persona> listado) throws FileNotFoundException {
-        this.listado = listado;
-        this.p = null;
-        precarga();
+        this.listado = new ArrayList<>();
+        this.p=null;
+       //  precarga();
     }
 
      public List<Persona> getListaPersonas(){
@@ -48,7 +54,44 @@ public class Controlador {
         this.j = jugador;
      }
      
-     private void precarga() throws FileNotFoundException{
+      
+     // guarda archivo antes de salir del programa 
+     public void guardarArchivo() {
+    try (BufferedWriter bFw = new BufferedWriter(new FileWriter("Precarga.txt", false))) {
+        for (Persona indice : listado) {
+            StringBuilder linea = new StringBuilder();
+            linea.append(indice.getNombre()).append(",")
+                 .append(indice.getApellido()).append(",")
+                 .append(indice.getNacionalidad()).append(",")
+                 .append(indice.getFechaNac().getDia()).append(",")
+                 .append(indice.getFechaNac().getMes()).append(",")
+                 .append(indice.getFechaNac().getAnio());
+
+            if (indice instanceof Jugador) {
+                Jugador j = (Jugador) indice;
+                linea.append(",")
+                     .append(j.getClubActual()).append(",")
+                     .append(j.getGoles()).append(",")
+                     .append(j.getPosicion()).append(",")
+                     .append(j.getTarjetasAmarillas()).append(",")
+                     .append(j.getTarjetasRojas());
+            } else if (indice instanceof Arbitro) {
+                Arbitro a = (Arbitro) indice;
+                linea.append(",")
+                     .append(a.getInternacional()).append(",")
+                     .append(a.getTarjetasSacadas());
+            }
+
+            bFw.write(linea.toString());
+            bFw.newLine(); // separa registros por línea
+        }
+        System.out.println("Archivo guardado correctamente.");
+    } catch (IOException e) {
+        System.out.println("Error al guardar: " + e.getMessage());
+    }
+}
+    
+     public void precarga() throws FileNotFoundException{
         File prueba = new File("Precarga.txt");
         if (!prueba.exists()) {
             System.out.println("El archivo no existe.");
@@ -109,53 +152,81 @@ public class Controlador {
      }
       
      public void setNombrePersona(String nombre){
-     p.setNombre(nombre);
+      if(this.p==null)
+          this.p=new Persona();
+      this.p.setNombre(nombre);
      }
      public void setApellidoPersona(String apellido){
-         p.setApellido(apellido);
+         this.p.setApellido(apellido);
      }
      public void setNacionalidadPersona(String nacionalidad){
-         p.setNacionalidad(nacionalidad);
+         this.p.setNacionalidad(nacionalidad);
      }
      public void setFechaNacimientoPersona(int dia, int mes, int anio){
          Fecha fechanac=new Fecha(dia,mes,anio);
-         p.setFechaNac(fechanac);
+         this.p.setFechaNac(fechanac);
      }
      public void setClubActualJugador(String equipo){
-         j.setClubActual(equipo);
+         this.j.setClubActual(equipo);
      }
      public void setPosicionJugador(int posicion){
-         j.setPosicion(posicion);
+         this.j.setPosicion(posicion);
      }
      public void setPosicionJugadorBuscado(Jugador jugadorBuscado,int posicion){
          jugadorBuscado.setPosicion(posicion);
      }
      public void setGolesJugador(int goles){
-         j.setGoles(goles);
+         this.j.setGoles(goles);
      }
      public void setGolesJugadorBuscado(Jugador jugadorBuscado,int goles){
          jugadorBuscado.setGoles(goles);
      }
      public void setTarjetasAmarillasJugador(int tarjetasamarillas){
-         j.setTarjetasAmarillas(tarjetasamarillas);
+         this.j.setTarjetasAmarillas(tarjetasamarillas);
      }
      public void setTarjetasAmarillasJugadorBuscado(Jugador jugadorBuscado,int tarjetasamarillas){
          jugadorBuscado.setTarjetasAmarillas(tarjetasamarillas);
      }
      public void setTarjetasRojasJugador(int tarjerasrojas){
-         j.setTarjetasRojas(tarjerasrojas);
+         this.j.setTarjetasRojas(tarjerasrojas);
      }
      public void setTarjetasSacadasArbitro(int tarjetassacadas){
-         a.setTarjetasSacadas(tarjetassacadas);
+         this.a.setTarjetasSacadas(tarjetassacadas);
      }
      public void setTarjetasSacadasArbitroBuscado(Arbitro arbitroBuscado,int tarjetassacadas){
          arbitroBuscado.setTarjetasSacadas(tarjetassacadas);
      }
      public void setInternacional(boolean internacional){
-         a.setInternacional(internacional);
+         this.a.setInternacional(internacional);
      }
      public void setInternacionalBuscado(Arbitro arbitroBuscado,boolean internacional){
          arbitroBuscado.setInternacional(internacional);
+     }
+     public void setNombreJugador(String Nombre){
+         this.j.setNombre(Nombre);
+     }
+     public void setApellidoJugador(String Apellido){
+         this.j.setApellido(Apellido);
+     }
+     public void setNacionalidadJugador(String Nacionalidad){
+         this.j.setNacionalidad(Nacionalidad);
+     }
+     public void setFechaNacimientoJugador(int dia, int mes, int anio){
+         Fecha fechanac=new Fecha(dia, mes, anio);
+         this.j.setFechaNac(fechanac);
+     }
+          public void setNombreArbitro(String Nombre){
+         this.a.setNombre(Nombre);
+     }
+          public void setApellidoArbitro(String Apellido){
+         this.a.setApellido(Apellido);
+     }
+     public void setNacionalidadArbitro(String Nacionalidad){
+         this.a.setNacionalidad(Nacionalidad);
+     }
+     public void setFechaNacimientoArbitro(int dia, int mes, int anio){
+         Fecha fechanac=new Fecha(dia, mes, anio);
+         this.a.setFechaNac(fechanac);
      }
      
      //nombre persona/jugador/arbitro
@@ -372,6 +443,31 @@ public class Controlador {
         }
     }
     
+    public Boolean arbitroYaCargado(String nombre, String apellido){
+     for (Persona persona : listado) {
+            if (persona instanceof Arbitro) {
+                String apellidoArbitro= persona.getApellido();
+                String nombreArbitro = persona.getNombre();
+                if ((nombreArbitro != null && nombreArbitro.trim().equalsIgnoreCase(nombre.trim())) && (apellidoArbitro != null && apellidoArbitro.trim().equalsIgnoreCase(apellido.trim())) ) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+      public Boolean jugadorYaCargado(String nombre, String apellido){
+        for (Persona persona : listado) {
+            if (persona instanceof Jugador) {
+                String apellidoJugador= persona.getApellido();
+                String nombreJugador = persona.getNombre();
+                if ((nombreJugador != null && nombreJugador.trim().equalsIgnoreCase(nombre.trim())) && (apellidoJugador != null && apellidoJugador.trim().equalsIgnoreCase(apellido.trim())) ) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public Jugador buscarJugador(String thatJugador) throws JugadorNoEncontradoException {
         for (Persona persona : listado) {
             if (persona instanceof Jugador) {

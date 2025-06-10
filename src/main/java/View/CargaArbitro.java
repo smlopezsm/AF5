@@ -1,16 +1,31 @@
 package View;
 
 import Controller.Controlador;
+import Model.Persona;
 import java.awt.HeadlessException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class CargaArbitro extends javax.swing.JPanel {
-
-    public CargaArbitro() {
+   
+    private Controlador controladorLista=new Controlador();
+    List<Persona>lista=new ArrayList<>();
+    public CargaArbitro(Controlador controladoraLista) {
         initComponents();
+        this.controladorLista=controladoraLista;       
+    }
+    public void limpiarPantalla(){
+        txtApellidoArbitro.setText("");
+        txtNombreArbitro.setText("");
+        nacionalidadBox.setSelectedIndex(0);
+        diaBox.setSelectedIndex(0);
+        mesBox.setSelectedIndex(0);
+        AnioBox.setSelectedIndex(0);
+        InternacionalBox.setSelectedIndex(0);
+        TotalTarjetasSpn.setValue(0);
     }
     
-    private Controlador controlador;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -30,9 +45,9 @@ public class CargaArbitro extends javax.swing.JPanel {
         mesBox = new javax.swing.JComboBox<>();
         txtApellidoArbitro = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtNacionalidadArbitro = new javax.swing.JTextField();
         AgregarArbitroBtn = new javax.swing.JButton();
         LimpiarArbitroBtn = new javax.swing.JButton();
+        nacionalidadBox = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(723, 473));
 
@@ -105,6 +120,8 @@ public class CargaArbitro extends javax.swing.JPanel {
             }
         });
 
+        nacionalidadBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Afganistán", "Albania", "Alemania", "Andorra", "Angola", "Antigua y Barbuda", "Arabia Saudita", "Argelia", "Argentina", "Armenia", "Australia", "Austria", "Azerbaiyán", "Bahamas", "Bangladés", "Barbados", "Baréin", "Bélgica", "Belice", "Benín", "Bielorrusia", "Birmania (Myanmar)", "Bolivia", "Bosnia y Herzegovina", "Botsuana", "Brasil", "Brunéi", "Bulgaria", "Burkina Faso", "Burundi", "Bután", "Cabo Verde", "Camboya", "Camerún", "Canadá", "Catar", "Chad", "Chile", "China", "Chipre", "Colombia", "Comoras", "Corea del Norte", "Corea del Sur", "Costa de Marfil", "Costa Rica", "Croacia", "Cuba", "Dinamarca", "Dominica", "Ecuador", "Egipto", "El Salvador", "Emiratos Árabes Unidos", "Eritrea", "Eslovaquia", "Eslovenia", "España", "Estados Unidos", "Estonia", "Esuatini", "Etiopía", "Filipinas", "Finlandia", "Fiyi", "Francia", "Gabón", "Gambia", "Georgia", "Ghana", "Granada", "Grecia", "Guatemala", "Guinea", "Guinea-Bisáu", "Guinea Ecuatorial", "Guyana", "Haití", "Honduras", "Hungría", "India", "Indonesia", "Irak", "Irán", "Irlanda", "Islandia", "Islas Marshall", "Islas Salomón", "Israel", "Italia", "Jamaica", "Japón", "Jordania", "Kazajistán", "Kenia", "Kirguistán", "Kiribati", "Kuwait", "Laos", "Lesoto", "Letonia", "Líbano", "Liberia", "Libia", "Liechtenstein", "Lituania", "Luxemburgo", "Madagascar", "Malasia", "Malaui", "Maldivas", "Malí", "Malta", "Marruecos", "Mauricio", "Mauritania", "México", "Micronesia", "Moldavia", "Mónaco", "Mongolia", "Montenegro", "Mozambique", "Namibia", "Nauru", "Nepal", "Nicaragua", "Níger", "Nigeria", "Noruega", "Nueva Zelanda", "Omán", "Países Bajos", "Pakistán", "Palaos", "Panamá", "Papúa Nueva Guinea", "Paraguay", "Perú", "Polonia", "Portugal", "Reino Unido", "República Centroafricana", "República Checa", "República del Congo", "República Democrática del Congo", "República Dominicana", "Ruanda", "Rumanía", "Rusia", "San Cristóbal y Nieves", "San Marino", "San Vicente y las Granadinas", "Santa Lucía", "Santo Tomé y Príncipe", "Senegal", "Serbia", "Seychelles", "Sierra Leona", "Singapur", "Siria", "Somalia", "Sri Lanka", "Sudáfrica", "Sudán", "Sudán del Sur", "Suecia", "Suiza", "Surinam", "Tailandia", "Tanzania", "Tayikistán", "Timor Oriental", "Togo", "Tonga", "Trinidad y Tobago", "Túnez", "Turkmenistán", "Turquía", "Tuvalu", "Ucrania", "Uganda", "Uruguay", "Uzbekistán", "Vanuatu", "Vaticano", "Venezuela", "Vietnam", "Yemen", "Yibuti", "Zambia", "Zimbabue" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,10 +135,10 @@ public class CargaArbitro extends javax.swing.JPanel {
                         .addComponent(LimpiarArbitroBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNacionalidadArbitro)
-                        .addGap(7, 7, 7)
+                        .addComponent(nacionalidadBox, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
                         .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(InternacionalBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -177,13 +194,14 @@ public class CargaArbitro extends javax.swing.JPanel {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(InternacionalBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNacionalidadArbitro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(5, 5, 5)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(40, 40, 40)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(nacionalidadBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TotalTarjetasSpn)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -212,14 +230,7 @@ public class CargaArbitro extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNombreArbitroActionPerformed
 
     private void LimpiarArbitroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarArbitroBtnActionPerformed
-        txtApellidoArbitro.setText("");
-        txtNombreArbitro.setText("");
-        txtNacionalidadArbitro.setText("");
-        diaBox.setSelectedIndex(0);
-        mesBox.setSelectedIndex(0);
-        AnioBox.setSelectedIndex(0);
-        InternacionalBox.setSelectedIndex(0);
-        TotalTarjetasSpn.setValue(0);
+        limpiarPantalla();
         
     }//GEN-LAST:event_LimpiarArbitroBtnActionPerformed
 
@@ -237,7 +248,7 @@ public class CargaArbitro extends javax.swing.JPanel {
                 return;
         }
         
-        String nacionalidadArbitro = txtNacionalidadArbitro.getText();
+        String nacionalidadArbitro = nacionalidadBox.getSelectedItem().toString().trim();
         if (nacionalidadArbitro.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "¡Ingrese Nacionalidad!");
                 return;
@@ -245,7 +256,7 @@ public class CargaArbitro extends javax.swing.JPanel {
         
         int diaNac = (int) diaBox.getSelectedIndex();
         int mesNac = (int) mesBox.getSelectedIndex();
-        int anioNac = (int) AnioBox.getSelectedIndex();
+        int anioNac = Integer.parseInt(AnioBox.getSelectedItem().toString().trim());
         if(diaNac==0 || mesNac==0 || anioNac==0){
             JOptionPane.showMessageDialog(this,"Ingrese una Fecha Valida");
             return;
@@ -274,26 +285,37 @@ public class CargaArbitro extends javax.swing.JPanel {
         
         Controlador controladorAux=new Controlador();
        
-        controladorAux.setNombrePersona(nombrearbitro);
-        controladorAux.setApellidoPersona(apellidoarbitro);
-        controladorAux.setNacionalidadPersona(nacionalidadArbitro);
-        controladorAux.setFechaNacimientoPersona(diaNac, mesNac, anioNac);
+        controladorAux.setNombreArbitro(nombrearbitro);
+        controladorAux.setApellidoArbitro(apellidoarbitro);
+        controladorAux.setNacionalidadArbitro(nacionalidadArbitro);
+        controladorAux.setFechaNacimientoArbitro(diaNac, mesNac, anioNac);
         controladorAux.setInternacional(internacionalArbitro);
         controladorAux.setTarjetasSacadasArbitro(totaltarj);
-        controladorAux.AgregarArbitroALaLista(controladorAux.getArbitro());
+        
+        
+        
+      if (controladorLista.arbitroYaCargado(controladorAux.getNombreArbitro(),controladorAux.getApellidoArbitro()) == true) {
+                JOptionPane.showMessageDialog(null, "Este Arbitro Ya Esta Cargado", "Error", JOptionPane.ERROR_MESSAGE);
+                limpiarPantalla();
+            } else {
+                controladorLista.AgregarArbitroALaLista(controladorAux.getArbitro());
+                limpiarPantalla();
+                JOptionPane.showMessageDialog(this, "Arbitro Cargado Correctamente");
 
-        JOptionPane.showMessageDialog(this, "Arbitro Cargado Correctamente");
+            }
+
         
          } catch (ClassCastException e) {
             JOptionPane.showMessageDialog(this, "Error de conversión de datos: " + e.getMessage());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Formato numérico inválido: " + e.getMessage());
         } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(this, "Algunos campos no fueron seleccionados correctamente.");
+            JOptionPane.showMessageDialog(this, "Algunos campos no fueron seleccionados correctamente."+e.getMessage());
         } catch (HeadlessException e) {
             JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage());
         }
        
+        
     }//GEN-LAST:event_AgregarArbitroBtnActionPerformed
 
     private void mesBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mesBoxActionPerformed
@@ -315,8 +337,8 @@ public class CargaArbitro extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JComboBox<String> mesBox;
+    private javax.swing.JComboBox<String> nacionalidadBox;
     private javax.swing.JTextField txtApellidoArbitro;
-    private javax.swing.JTextField txtNacionalidadArbitro;
     private javax.swing.JTextField txtNombreArbitro;
     // End of variables declaration//GEN-END:variables
 }

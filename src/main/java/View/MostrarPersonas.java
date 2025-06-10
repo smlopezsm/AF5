@@ -2,12 +2,13 @@ package View;
 import Controller.Controlador;
 import Model.*;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 public class MostrarPersonas extends javax.swing.JPanel {
-    private Controlador controladoralista= new Controlador();
-    public MostrarPersonas(Controlador controladoralista) {
+    private Controlador ControladorLista= new Controlador();
+    public MostrarPersonas(Controlador ControladorLista) {
         initComponents();
-     this.controladoralista=controladoralista;
+     this.ControladorLista=ControladorLista;
     }
 
     @SuppressWarnings("unchecked")
@@ -100,28 +101,36 @@ public class MostrarPersonas extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     //
-    private void tablaArbitro(List<Persona> lista){
-      DefaultTableModel model = new DefaultTableModel();
+    private void TablaArbitro(List<Persona> lista){
+         if (lista.size() == 0) {
+           JOptionPane.showMessageDialog(null, "No se encontraron personas/árbitros cargados previamente");
+        }else{
+     DefaultTableModel model = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false; // Hace que ninguna celda sea editable
+        }
+    };
       model.addColumn("Nombre");
       model.addColumn("Apellido");
-      model.addColumn("Nacinalidad");
+      model.addColumn("Nacionalidad");
       model.addColumn("Fecha de Nacimiento");
       model.addColumn("Internacional");
       model.addColumn("Tarjetas sacadas");
       
-      Controlador cantroladorAux= new   Controlador();
+      Controlador ControladorAux= new Controlador();
       
       for(Persona indice: lista ){
           
           if(indice instanceof  Arbitro){
-             cantroladorAux.setArbitro((Arbitro) indice);
+             ControladorAux.setArbitro((Arbitro) indice);
              model.addRow(new Object[]{
-               cantroladorAux.getNombreArbitro(),
-               cantroladorAux.getApellidoArbitro(),
-               cantroladorAux.getNacionalidadArbitro(),
-               cantroladorAux.getFechaNacimientoArbitro(),
-               cantroladorAux.getArbitroInternacional(),
-               cantroladorAux.getTarjetasSacadasArbitro(),
+               ControladorAux.getNombreArbitro(),
+               ControladorAux.getApellidoArbitro(),
+               ControladorAux.getNacionalidadArbitro(),
+               ControladorAux.getFechaNacimientoArbitro(),
+               ControladorAux.getArbitroInternacional(),
+               ControladorAux.getTarjetasSacadasArbitro(),
          
               });
           }
@@ -129,37 +138,45 @@ public class MostrarPersonas extends javax.swing.JPanel {
       tablaDatos.setModel(model);
       scrollTabla.setViewportView(tablaDatos);
       scrollTabla.setVisible(true);
-      
+         }
     }
     //tabla jugador
-    private void tablaJugador(List<Persona> lista){
-     DefaultTableModel model = new DefaultTableModel();
+    private void TablaJugador(List<Persona> lista){
+        if (lista.size() == 0) {
+           JOptionPane.showMessageDialog(null, "No se encontraron personas/jugadores cargados previamente");
+        }else{ 
+      DefaultTableModel model = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false; // Hace que ninguna celda sea editable
+        }
+    };
       model.addColumn("Nombre");
       model.addColumn("Apellido");
-      model.addColumn("Nacinalidad");
+      model.addColumn("Nacionalidad");
       model.addColumn("Fecha de Nacimiento");
       model.addColumn("Equipo");
-      model.addColumn("Cant goles");
+      model.addColumn("Cantidad de goles");
       model.addColumn("Posición");
       model.addColumn("Tarjetas amarillas");
       model.addColumn("Tarjetas Rojas");
       
-      Controlador cantroladorAux= new   Controlador();
+      Controlador ControladorAux= new Controlador();
       
       for(Persona indice: lista ){
           
           if(indice instanceof  Jugador){
-             cantroladorAux.setJugador((Jugador) indice);
+             ControladorAux.setJugador((Jugador) indice);
              model.addRow(new Object[]{
-                cantroladorAux.getNombreJugador(),
-                cantroladorAux.getApellidoJugador(),
-                cantroladorAux.getNacionalidadJugador(),
-                cantroladorAux.getFechaNacimientoJugador(),
-                cantroladorAux.getClubActualJugador(),
-                cantroladorAux.getGolesJugador(),
-                cantroladorAux.getPosicionJugador(),
-                cantroladorAux.getTarjetasAmarillasJugador(),
-                cantroladorAux.getTarjetasRojasJugador()
+                ControladorAux.getNombreJugador(),
+                ControladorAux.getApellidoJugador(),
+                ControladorAux.getNacionalidadJugador(),
+                ControladorAux.getFechaNacimientoJugador(),
+                ControladorAux.getClubActualJugador(),
+                ControladorAux.getGolesJugador(),
+                ControladorAux.getPosicionJugador(),
+                ControladorAux.getTarjetasAmarillasJugador(),
+                ControladorAux.getTarjetasRojasJugador()
          
               });
           }
@@ -169,27 +186,35 @@ public class MostrarPersonas extends javax.swing.JPanel {
       scrollTabla.setViewportView(tablaDatos);
       scrollTabla.setVisible(true);
       
-    
+        }
     }
 
     //tabla personas
-    private void tablaPersona(List<Persona> lista){
-  
-      DefaultTableModel model = new DefaultTableModel();
+    private void TablaPersona(List<Persona> lista){
+         if (lista.size() == 0) {
+           JOptionPane.showMessageDialog(null, "No se encontraron personas cargadas previamente");
+        }else{
+       DefaultTableModel model = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false; // Hace que ninguna celda sea editable
+        }
+    };
+        
       model.addColumn("Nombre");
       model.addColumn("Apellido");
       model.addColumn("Nacinalidad");
       model.addColumn("Fecha de Nacimiento");
       
-      Controlador cantroladorAux= new   Controlador();
+      Controlador ControladorAux= new Controlador();
       
       for(Persona indice: lista ){
-        cantroladorAux.setPersona(indice);
+        ControladorAux.setPersona(indice);
        model.addRow(new Object[]{
-         cantroladorAux.getNombrePersona(),
-         cantroladorAux.getApellidoPersona(),
-         cantroladorAux.getNacionalidadPersona(),
-         cantroladorAux.getFechaNacimientoPersona()
+         ControladorAux.getNombrePersona(),
+         ControladorAux.getApellidoPersona(),
+         ControladorAux.getNacionalidadPersona(),
+         ControladorAux.getFechaNacimientoPersona()
        
       
       });
@@ -197,27 +222,27 @@ public class MostrarPersonas extends javax.swing.JPanel {
       tablaDatos.setModel(model);
       scrollTabla.setViewportView(tablaDatos);
       scrollTabla.setVisible(true);
-      
+         }
     }
     
     
     private void botonArbitroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonArbitroActionPerformed
         // TODO add your handling code here:
-        tablaArbitro(controladoralista.getListaPersonas());
+        TablaArbitro(ControladorLista.getListaPersonas());
          this.revalidate(); // Asegurar que los componentes se actualicen
          this.repaint(); 
     }//GEN-LAST:event_botonArbitroActionPerformed
 
     private void botonJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonJugadoresActionPerformed
         // TODO add your handling code here:
-         tablaJugador(controladoralista.getListaPersonas());
+         TablaJugador(ControladorLista.getListaPersonas());
          this.revalidate(); // Asegurar que los componentes se actualicen
          this.repaint(); 
     }//GEN-LAST:event_botonJugadoresActionPerformed
 
     private void botonPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPersonasActionPerformed
         // TODO add your handling code here:
-        tablaPersona(controladoralista.getListaPersonas());
+        TablaPersona(ControladorLista.getListaPersonas());
         this.revalidate(); // Asegurar que los componentes se actualicen
         this.repaint(); 
     }//GEN-LAST:event_botonPersonasActionPerformed

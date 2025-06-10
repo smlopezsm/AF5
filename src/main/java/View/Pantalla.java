@@ -1,16 +1,18 @@
 package View;
 import Controller.Controlador;
 import java.awt.BorderLayout;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class Pantalla extends javax.swing.JFrame {
-    private Controlador controladoralista= new Controlador();
-    public Pantalla(Controlador controladoralista) {
+    private Controlador ControladorLista= new Controlador();
+    public Pantalla(Controlador ControladorLista) throws FileNotFoundException {
         initComponents();
         setDate();
-        this.controladoralista=controladoralista;
+        this.ControladorLista=ControladorLista;
+        this.ControladorLista.precarga();
     }
 
 
@@ -281,7 +283,7 @@ public class Pantalla extends javax.swing.JFrame {
     private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
         contenedorConsulta.removeAll();
         contenedorConsulta.setLayout(new BorderLayout());
-        contenedorConsulta.add(new Cargar(), BorderLayout.CENTER);
+        contenedorConsulta.add(new Cargar(ControladorLista), BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_btnCargarActionPerformed
@@ -289,7 +291,7 @@ public class Pantalla extends javax.swing.JFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         contenedorConsulta.removeAll();
         contenedorConsulta.setLayout(new BorderLayout());
-        contenedorConsulta.add(new Modificar(controladoralista), BorderLayout.CENTER);
+        contenedorConsulta.add(new Modificar(ControladorLista), BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -297,7 +299,7 @@ public class Pantalla extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         contenedorConsulta.removeAll();
         contenedorConsulta.setLayout(new BorderLayout());
-        contenedorConsulta.add(new Eliminar(controladoralista), BorderLayout.CENTER);
+        contenedorConsulta.add(new Eliminar(ControladorLista), BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -305,7 +307,7 @@ public class Pantalla extends javax.swing.JFrame {
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
         contenedorConsulta.removeAll();
         contenedorConsulta.setLayout(new BorderLayout());
-        contenedorConsulta.add(new Consulta(), BorderLayout.CENTER);
+        contenedorConsulta.add(new Consulta(ControladorLista), BorderLayout.CENTER);
        this.revalidate();
        this.repaint(); 
     }//GEN-LAST:event_btnConsultasActionPerformed
@@ -314,23 +316,17 @@ public class Pantalla extends javax.swing.JFrame {
         // TODO add your handling code here:
          contenedorConsulta.removeAll();
         contenedorConsulta.setLayout(new BorderLayout());
-        contenedorConsulta.add(new MostrarPersonas(controladoralista), BorderLayout.CENTER);
+        contenedorConsulta.add(new MostrarPersonas(ControladorLista), BorderLayout.CENTER);
        this.revalidate();
        this.repaint();
     }//GEN-LAST:event_btnMostrarActionPerformed
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
         // TODO add your handling code here:
+         ControladorLista.guardarArchivo();
         this.dispose();
     }//GEN-LAST:event_btnsalirActionPerformed
 
-    /*public static void main(String args[]) {
-        FlatCobalt2IJTheme.setup();
-        
-        java.awt.EventQueue.invokeLater(() -> {
-            new Pantalla().setVisible(true);
-        });
-    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
