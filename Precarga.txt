@@ -1,8 +1,54 @@
-Pierluigi,Collina,italiano,13,2,1960,false,9034
-Miguel Ángel,Borja Hernández,Colombiano,26,1,1993,River Plate,0,2,0,9
+Miguel Ángel,Borja Hernández,Colombiano,26,1,1993,River Plate,56,1,45,9
 Néstor,Pitana,Argentina,17,6,1975,false,15
-Franco,Armani,Argentina,16,10,1986,River Plate,430,4,86,0
+Franco,Armani,Argentina,16,10,1986,River Plate,0,1,2,0
 Franco,Mastantuono,Argentina,14,8,2007,River Plate,7,3,0,0
-Facundo,Colidio,Argentina,4,1,200,River Plate,10,4,0,0
+Raphinha,do Nascimento,Brasil,14,12,1996,Barcelona Fc,18,4,4,0
+Facundo,Colidio,Argentina,4,1,2000,River Plate,10,4,0,0
 Paulo,Díaz,Chilena,25,8,1994,River Plate,2,2,3,0
-Nacho,Vidal,Chad,8,1,1962,Barracas Central,69,2,6,9
+Sergio Germán,Romero,Argentina,22,2,1987,Boca Juniors,0,1,1,0
+Leandro,Leandro,Argentina,21,9,2002,Boca Juniors,0,1,2,0
+Cristian,Medina,Argentina,1,6,2002,Boca Juniors,8,3,3,0
+Milton,Delgado,Argentina,16,6,2005,Boca Juniors,2,3,4,1
+Miguel Ángel,Merentiel Serrano,Uruguay,24,2,1996,Boca Juniors,6,4,0,4
+Lamine,Yamal,Española,13,7,2007,Barcelona Fc,14,4,3,1
+Wojciech,Szczęsny,Polaca,18,4,1990,Barcelona Fc,0,1,3,0
+Robert,Lewandowski,Polaca,21,8,1988,Barcelona Fc,27,2,2,1
+Jules,Koundé,Francesa,12,11,1998,Barcelona Fc,2,2,1,1
+Mbappé,Kylian,Francia,20,12,1998,Real Madrid,43,4,58,0
+Vinícius,Júnior,Brasil,12,7,2000,Real Madrid,21,3,0,0
+Jude,Bellingham,Real Madrid,29,6,2003,Real Madrid,14,3,10,1
+Federico,Valverde,Uruguay,22,7,1998,Real Madrid,9,3,2,0
+Antonio,Rüdiger,Alemania,3,3,1993,Real Madrid,3,2,0,2
+Jhonatan,Candia,Uruguay,15,3,1995,Barracas Central,6,4,5,0
+Facundo,Kruger,Argentina,5,6,2000,Barracas Central,5,4,0,0
+Gonzalo,Morales,Argentina,4,3,2003,Barracas Central,1,4,0,0
+Iván,Tapia,Argentina,23,11,1998,Barracas Central,0,3,0,0
+Nicolás,Blandi,Argentina,13,1,1990,Barracas Central,1,4,0,0
+Alejandro,Molina,Argentina,10,8,1996,San Martin de San Juan,0,3,0,0
+Alejandro,Sienra,Argentina,12,7,2000,San Martin de San Juan,0,3,9,0
+Nicolás,Pelaitay,Argentina,27,12,1992,San Martin de San Juan,0,2,10,0
+Andrés,Cáceres,Argentina,11,7,1999,San Martin de San Juan,2,2,8,0
+Sebastián,López,Argentina,18,4,1988,San Martin de San Juan,0,1,5,0
+Santiago,Ascacíbar,Argentina,25,2,1997,Estudiantes,5,3,9,0
+Fabricio,Iacovich,Argentina,29,1,2002,Estudiantes,0,1,0,0
+Cristian,Medina,Argentina,1,8,2002,Estudiantes,0,4,3,0
+Joaquín,Tobio Burgos,Argentina,14,12,2004,Estudiantes,2,3,0,1
+Fabricio,Pérez,Argentina,7,12,2005,Estudiantes,3,3,0,0
+Lucas,De León,Argentina,1,3,1991,Juventud Unida,0,1,0,0
+Nicolás,Trejo,Argentina,2,12,1996,Juventud Unida,3,2,0,1
+Paolo,Impini,Argentina,4,6,2000,Juventud Unida,0,3,0,1
+Diego,Barrado,Argentina,7,8,1995,Juventud Unida,5,4,0,1
+Juan,Sánchez,Argentina,6,7,2000,Juventud Unida,7,4,3,0
+Alejandro,Medina,Argentina,4,7,1993,Defensores,0,1,0,0
+Facundo,Pons,Argentina,22,11,1995,Defensores,5,4,2,1
+Fernando,Rodríguez,Argentina,2,5,2001,Defensores,3,1,0,1
+Agustín,Massaccesi,Argentina,3,7,2003,Defensores,3,2,8,0
+Ezequiel,Aguirre,Argentina,10,1,1992,Defensores,12,4,6,0
+Nicolás,Mazzola,Argentina,28,1,1990,Sol de Mayo,8,4,0,1
+Mariano Oscar,Rivadeneira,Argentina,5,7,2000,Sol de Mayo,5,4,3,2
+Maximiliano Hernán,Paredes,Argentina,6,9,2003,Sol de Mayo,5,4,0,1
+Maximiliano José,Osurak,Argentina,5,7,2003,Sol de Mayo,3,3,0,1
+Matías,Ponce,Argentina,7,2,2003,Sol de Mayo,0,4,0,2
+cristiano,ronaldo,Austria,1,1,1950,Boca Juniors,1,1,1,1
+ney,jr,Australia,4,4,1953,Boca Juniors,2,2,2,2
+jose,rodriguez,Colombia,3,4,1953,false,7

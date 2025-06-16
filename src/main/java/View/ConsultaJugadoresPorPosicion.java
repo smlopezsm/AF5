@@ -56,7 +56,7 @@ public class ConsultaJugadoresPorPosicion extends javax.swing.JPanel {
         
          
         if(!jugadorEncontrado){
-          JOptionPane.showMessageDialog(null,"No se encontraron jugadores que superen la cantidad de :"+" goles.");
+          JOptionPane.showMessageDialog(null,"No se encontraron jugadores con la posicion: "+posiciones.getSelectedItem()+".");
         }else{
          tabla.setModel(model);
        panelTabla.setViewportView(tabla);
@@ -110,14 +110,14 @@ public class ConsultaJugadoresPorPosicion extends javax.swing.JPanel {
 
             },
             new String [] {
-                "nombre", "equipo", "posición", "Cant goles"
+                "Datos"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false
             };
 
             public Class getColumnClass(int columnIndex) {
